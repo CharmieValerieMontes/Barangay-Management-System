@@ -1,0 +1,307 @@
+body {
+	background-color: rgb(169, 255, 169);
+    margin: 0;
+    padding: 0;
+}
+
+/*LOGIN*/
+
+.loginPage {
+  	width: 310px;
+  	margin: auto;
+  	margin-top: 100px;
+  	font-family: monospace;
+  	font-size: 16px;
+  	background-color: #fff;
+  	padding: 20px;
+  	border-radius: 10px;
+  	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+	width: 43%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+select {
+	width: 30%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+button {
+	background-color: rgb(42, 247, 49);
+	color: #fff;
+	padding: 10px 20px;
+	font-family: monospace;
+  	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #9ff785;
+}
+
+/*HOME*/
+
+header {
+	font-family: monospace;
+	font-size: 16px;
+	background-color: rgb(39, 245, 49);
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.block1{
+	justify-content: space-evenly;
+	align-items: center;
+}
+.block1 img {
+	width: 32%;
+	height: 12%;
+}
+
+
+.footerLine {
+ 	border-top: 1px solid #020202;
+  padding-top: 10px;
+}
+
+.social {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.social a {
+	display: inline-block;
+	margin: 0 10px;
+	color: #333;
+	transition: color 0.3s ease;
+}
+
+.social a:hover {
+	color: #79ee69;
+}
+
+h1 {
+  display: flex;
+  align-items: center;
+}
+
+p .logo {
+  text-align: center;
+}
+
+nav {
+	font-family: monospace;
+	background-color: rgb(169, 255, 169);
+	overflow: hidden;
+	align-items: center;
+	justify-content: center;
+}
+
+nav a {
+	float: left;
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+nav a:hover {
+	background-color: rgb(42, 233, 42);
+	color: white;
+}
+
+nav a.active {
+    background-color: rgb(20, 226, 13);
+    color: white;
+}
+
+.logout {
+	text-align: right;
+	color: red;
+}
+
+.logout:hover {
+	color: red;
+}
+
+main {
+	font-family: monospace;
+	padding: 20px;
+}
+
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.card {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #ddd;
+}
+
+h2 {
+	margin-top: 0;
+}
+
+p {
+	margin: 0;
+}
+
+/*BLOTTER*/
+
+.blotterPage {
+	background-color: rgb(247, 248, 247);
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px #ddd;
+}
+
+.blotterPage h2 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.blotterPage p {
+	margin-bottom: 20px;
+}
+
+.blotterPage input[type="text"] {
+	width: 40%;
+	padding: 8px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.blotterPage button {
+	background-color: rgb(42, 247, 49);
+	color: #fff;
+	padding: 10px 20px;
+	font-family: monospace;
+	font-size: 16px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	cursor: pointer;
+	margin-bottom: 20px;
+}
+
+.blotterPage button:hover {
+	background-color: rgb(163, 255, 160);
+}
+
+.blotterPage table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.blotterPage th {
+	background-color: rgb(0, 163, 0);
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+.blotterPage td {
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.blotterPage td:first-child {
+	width: 10%;
+}
+
+.blotterPage td:last-child {
+	width: 30%;
+	text-align: center;
+}
+
+.blotterPage .createRecord {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.blotterPage .createRecord label {
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.blotterPage .createRecord input[type="text"] {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.blotterPage .createRecord button {
+	margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+tr.selected {
+    background-color: #d3d3d3;
+}
+
+/*New Residence*/
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th,
+table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: rgb(0, 163, 0);
+    color: white;
+    font-weight: bold;
+}
+.imagePreview {
+  max-width: 20%;
+  max-height: 5%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.imagePreview img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain;
+}
