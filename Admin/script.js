@@ -291,61 +291,68 @@ function imageUpload(){
     reader.readAsDataURL(file);
   });
 }
-function saveResidentData(event) {
-    event.preventDefault(); // Prevent the default form submission
+function saveResidentData() {
+    let lastName = $('#txtResLName').val().trim();
+    let firstName = $('#txtResFName').val().trim();
+    let middleName = $('#txtResMName').val().trim();
+    let sex = $('input[name="sex"]:checked').val();
+    let maritalStatus = $('#maritalStatus').val();
+    let address = $('#txtResAddress').val().trim();
+    let employmentStatus = $('input[name="employment_status"]:checked').val();
+    let birthDate = $('#ResBirthDate').val();
+    let birthPlace = $('#txtResBirthPlace').val().trim();
+    let age = $('#age').val();
+    let religion = $('#txtResReligion').val().trim();
+    let voterStatus = $('input[name="voter_status"]:checked').val();
 
-    // Retrieve form data
-    let lastName = document.getElementById('txtResLName').value.trim();
-    let firstName = document.getElementById('txtResFName').value.trim();
-    let middleName = document.getElementById('txtResMName').value.trim();
-    let sex = document.querySelector('input[name="sex"]:checked');
-    let maritalStatus = document.getElementById('maritalStatus').value;
-    let address = document.getElementById('txtResAddress').value.trim();
-    let employmentStatus = document.querySelector('input[name="employment_status"]:checked');
-    let birthDate = document.getElementById('ResBirthDate').value.trim();
-    let birthPlace = document.getElementById('txtResBirthPlace').value.trim();
-    let age = document.getElementById('age').value.trim();
-    let religion = document.getElementById('txtResReligion').value.trim();
-    let voterStatus = document.querySelector('input[name="voter_status"]:checked');
-
-    // Perform validation
     if (
-        lastName === '' || firstName === '' || address === '' || birthPlace === '' ||
-        religion === '' || birthDate === '' || maritalStatus === '' || age === ''
+        lastName === '' ||
+        firstName === '' ||
+        middleName === '' ||
+        address === '' ||
+        birthPlace === '' ||
+        religion === '' ||
+        birthDate === '' ||
+        maritalStatus === '' ||
+        age === ''
     ) {
-        alert('Please fill in all required fields.');
+        alert('Please fill all fields!');
         return;
     }
 
     if (!sex || !employmentStatus || !voterStatus) {
-        alert('Please select all necessary options.');
+        alert('Please select Status!');
         return;
     }
 
-    // If validation passes, you can proceed with form submission or data processing
-    // For now, let's log the form data
-    console.log({
-        lastName, firstName, middleName, sex: sex.value, maritalStatus, address, employmentStatus: employmentStatus.value,
-        birthDate, birthPlace, age, religion, voterStatus: voterStatus.value
+    // Save the data to the database using AJAX
+    $.ajax({
+        url: 'db.php',
+        method: 'POST',
+        data: {
+            last_name: lastName,
+            first_name: firstName,
+            middle_name: middleName,
+            sex: sex,
+            marital_status: maritalStatus,
+            address: address,
+            employment_status: employmentStatus,
+            birth_date: birthDate,
+            place_of_birth: birthPlace,
+            age: age,
+            religion: religion,
+            voter_status: voterStatus
+        },
+        success: function(response) {
+            console.log(response); // Log the response from the server
+            clearResidentData(); // Clear the form fields after successful submission
+        },
+        error: function(xhr, status, error) {
+            console.error(error); // Log any errors that occur during the AJAX request
+        }
     });
-
-    // Reset the form fields after successful submission
-    document.getElementById('txtResLName').value = '';
-    document.getElementById('txtResFName').value = '';
-    document.getElementById('txtResMName').value = '';
-    document.getElementById('maritalStatus').value = '';
-    document.getElementById('txtResAddress').value = '';
-    employmentStatus.checked = false;
-    document.getElementById('ResBirthDate').value = '';
-    document.getElementById('txtResBirthPlace').value = '';
-    document.getElementById('age').value = '';
-    document.getElementById('txtResReligion').value = '';
-    voterStatus.checked = false;
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("btnsaveInfo").addEventListener("click", saveResidentData);
-});
+            
 function displayData() {
     let residents = JSON.parse(localStorage.getItem('residents')) || [];
     let tableBody = $('#residentsTable tbody');

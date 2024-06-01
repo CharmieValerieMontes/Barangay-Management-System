@@ -154,7 +154,7 @@
         </div>
 
         <div class="card residencePage">
-          <form action="db.php" method="post" enctype="multipart/form-data"  <form action="db.php" method="post" onsubmit="saveResidentData()"></form>>
+          <form action="db.php" method="post" enctype="multipart/form-data">
             <h1>NEW RESIDENCE</h1>
             <br />
             Upload your Photo:
@@ -214,6 +214,7 @@
             <button type="button" id="btndeleteInfo">Delete</button>
             <button type="button" id="btnclearAll">Clear All Records</button
             ><br /><br />
+          </form>
           
           <table id="residentsTable">
             <thead>
@@ -236,7 +237,7 @@
               <!-- Table rows will be dynamically added here -->
             </tbody>
           </table>
-        </form>
+        
         </div>
 
         <br />
