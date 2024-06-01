@@ -291,86 +291,61 @@ function imageUpload(){
     reader.readAsDataURL(file);
   });
 }
+function saveResidentData(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-function saveResidentData() {
-    let lastName = $('#txtResLName').val();
-  let firstName = $('#txtResFName').val();
-  let middleName = $('#txtResMName').val();
-  let sex = $('input[name="sex"]:checked').val();
-  let maritalStatus = $('#maritalStatus').val();
-  let address = $('#txtResAddress').val();
-  let employmentStatus = $('input[name="employmentStatus"]:checked').val();
-  let birthDate = $('#ResBirthDate').val();
-  let birthPlace = $('#txtResBirthPlace').val();
-  let age = $('#age').val();
-  let religion = $('#txtResReligion').val();
-  let voterStatus = $('input[name="voterStatus"]:checked').val();
+    // Retrieve form data
+    let lastName = document.getElementById('txtResLName').value.trim();
+    let firstName = document.getElementById('txtResFName').value.trim();
+    let middleName = document.getElementById('txtResMName').value.trim();
+    let sex = document.querySelector('input[name="sex"]:checked');
+    let maritalStatus = document.getElementById('maritalStatus').value;
+    let address = document.getElementById('txtResAddress').value.trim();
+    let employmentStatus = document.querySelector('input[name="employment_status"]:checked');
+    let birthDate = document.getElementById('ResBirthDate').value.trim();
+    let birthPlace = document.getElementById('txtResBirthPlace').value.trim();
+    let age = document.getElementById('age').value.trim();
+    let religion = document.getElementById('txtResReligion').value.trim();
+    let voterStatus = document.querySelector('input[name="voter_status"]:checked');
 
-  if (
-    lastName === '' ||
-    firstName === '' ||
-    middleName === '' ||
-    address === '' ||
-    birthPlace === '' ||
-    religion === '' ||
-    birthDate === '' ||
-    maritalStatus === '' ||
-    age === ''
-  ) {
-    alert('Please fill all fields!');
-    return;
-  }
+    // Perform validation
+    if (
+        lastName === '' || firstName === '' || address === '' || birthPlace === '' ||
+        religion === '' || birthDate === '' || maritalStatus === '' || age === ''
+    ) {
+        alert('Please fill in all required fields.');
+        return;
+    }
 
-  if (!sex || !employmentStatus || !voterStatus) {
-    alert('Please select Status!');
-    return;
-  }
+    if (!sex || !employmentStatus || !voterStatus) {
+        alert('Please select all necessary options.');
+        return;
+    }
 
-  let residents = JSON.parse(localStorage.getItem('residents')) || [];
-  let selectedRow = $('#residentsTable tr.selected');
+    // If validation passes, you can proceed with form submission or data processing
+    // For now, let's log the form data
+    console.log({
+        lastName, firstName, middleName, sex: sex.value, maritalStatus, address, employmentStatus: employmentStatus.value,
+        birthDate, birthPlace, age, religion, voterStatus: voterStatus.value
+    });
 
-  if (selectedRow.length === 0) {
-    // Create resident object
-    let resident = {
-      lastName: lastName,
-      firstName: firstName,
-      middleName: middleName,
-      sex: sex,
-      maritalStatus: maritalStatus,
-      address: address,
-      employmentStatus: employmentStatus,
-      birthDate: birthDate,
-      birthPlace: birthPlace,
-      age: age,
-      religion: religion,
-      voterStatus: voterStatus,
-    };
-    // Add resident to the residents array
-    residents.push(resident);
-  } else {
-    let rowIndex = selectedRow.index();
-    residents[rowIndex] = {
-      lastName: lastName,
-      firstName: firstName,
-      middleName: middleName,
-      sex: sex,
-      maritalStatus: maritalStatus,
-      address: address,
-      employmentStatus: employmentStatus,
-      birthDate: birthDate,
-      birthPlace: birthPlace,
-      age: age,
-      religion: religion,
-      voterStatus: voterStatus,
-    };
-    selectedRow.removeClass('selected');
-  }
-
-  // Save residents array to local storage
-  localStorage.setItem('residents', JSON.stringify(residents));
-  clearResidentData();
+    // Reset the form fields after successful submission
+    document.getElementById('txtResLName').value = '';
+    document.getElementById('txtResFName').value = '';
+    document.getElementById('txtResMName').value = '';
+    document.getElementById('maritalStatus').value = '';
+    document.getElementById('txtResAddress').value = '';
+    employmentStatus.checked = false;
+    document.getElementById('ResBirthDate').value = '';
+    document.getElementById('txtResBirthPlace').value = '';
+    document.getElementById('age').value = '';
+    document.getElementById('txtResReligion').value = '';
+    voterStatus.checked = false;
 }
-            
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("btnsaveInfo").addEventListener("click", saveResidentData);
+});
 function displayData() {
     let residents = JSON.parse(localStorage.getItem('residents')) || [];
     let tableBody = $('#residentsTable tbody');
