@@ -1,51 +1,50 @@
 <?php
+$LastName = $_POST["last_name"];
+$FirstName = $_POST["first_name"];
+$MiddleName = $_POST["middle_name"];
+$sex = $_POST["sex"];
+$maritalStatus = filter_input(INPUT_POST, "marital_status", FILTER_SANITIZE_STRING);
+$address = $_POST["address"];
+$employmentStatus = filter_input(INPUT_POST, "employment_status", FILTER_SANITIZE_STRING);
+$birthDate = $_POST["birth_date"]; // Assuming birth_date is a valid date string
+$BirthPlace = $_POST["place_of_birth"]; // Assuming you want to sanitize this
+$age = $_POST["age"];
+$religion = $_POST["religion"];
+$voterStatus = isset($_POST['voter_status']) && in_array('Active', $_POST['voter_status']) ? 'Active' : 'Inactive';
 
-var_dump($_POST); // Debug statement to see the submitted form data
-$servername = "localhost";
+$host = "localhost";
+$dbname = "barangay";
 $username = "root";
 $password = "";
-$dbname = "barangay";
 
+$conn = mysqli_connect($host, $username, $password, $dbname);
 
-
-// Connect to the database
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (mysqli_connect_errno()) {
+    die("Connection error: " . mysqli_connect_error());
 }
 
-// Check if the form is submitted
+$sql = "INSERT INTO residences (last_name, first_name, middle_name, sex, marital_status, address, employment_status, birth_date, place_of_birth, age, religion, voter_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // Retrieve form data
-    $lastName =($_POST['last_name']) ;
-    $firstName = ($_POST['first_name']) ;
-    $middleName = ($_POST['middle_name']) ;
-    $sex = ($_POST['sex']) ;
-    $maritalStatus = ($_POST['marital_status']) ;
-    $address = ($_POST['address']) ;
-    $employmentStatus = ($_POST['employment_status']) ;
-    $birthDate = ($_POST['birth_date']);
-    $placeOfBirth = ($_POST['place_of_birth']);
-    $age = ($_POST['age']);
-    $religion = ($_POST['religion']) ;
-    $voterStatus = 'Inactive'; // Default value
-    if (($_POST['voter_status'])) {
-        $voterStatus = in_array('Active', $_POST['voter_status']) ? 'Active' : 'Inactive';
-    }
+$stmt = mysqli_stmt_init($conn);
 
-    // SQL query to insert data into the database
-    $sql = "INSERT INTO residences (last_name, first_name, middle_name, sex, marital_status, address, employment_status, birth_date, place_of_birth, age, religion, voter_status) VALUES ('$lastName', '$firstName', '$middleName', '$sex', '$maritalStatus', '$address', '$employmentStatus', '$birthDate', '$placeOfBirth', '$age', '$religion', '$voterStatus')";
+if (!mysqli_stmt_prepare($stmt, $sql)) {
+    die(mysqli_error($conn));
+}
 
-    // Execute the query
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+mysqli_stmt_bind_param($stmt, "sssissssisss",
+                       $LastName,
+                       $FirstName,
+                       $MiddleName,
+                       $sex,
+                       $maritalStatus,
+                       $address,
+                       $employmentStatus,
+                       $birthDate,
+                       $BirthPlace,
+                       $age,
+                       $religion,
+                       $voterStatus);
 
-
-// Close the connection
-$conn->close();
-
+mysqli_stmt_execute($stmt);
+echo "Record saved.";
