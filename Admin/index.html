@@ -154,22 +154,21 @@
         </div>
 
         <div class="card residencePage">
-          <form action="db.php" method="post"></form>
-          <h1>NEW RESIDENCE</h1>
-          <br />
-          
+          <form action="db.php" method="post" enctype="multipart/form-data">
+            <h1>NEW RESIDENCE</h1>
+            <br />
             Upload your Photo:
-            <input type="file" id="imageInput" />
+            <input type="file" id="imageInput" name="photo" />
             <div id="imagePreview"></div>
-            <br />
-            <br />
-            Last Name: <input type="text" name="last_name" id="txtResLName" />
-            <br />
+            <br /><br />
+            Last Name:
+            <input type="text" name="last_name" id="txtResLName" /><br />
             First Name:
-            <input type="text" name="first_name" id="txtResFName" /> <br />
+            <input type="text" name="first_name" id="txtResFName" /><br />
             Middle Name:
-            <input type="text" name="middle_name" id="txtResMName" /> <br />
-            Sex: <input type="radio" name="sex" value="Male" />MALE
+            <input type="text" name="middle_name" id="txtResMName" /><br />
+            Sex:
+            <input type="radio" name="sex" value="Male" />MALE
             <input type="radio" name="sex" value="Female" />FEMALE<br /><br />
             Marital Status:
             <select id="maritalStatus" name="marital_status">
@@ -179,8 +178,8 @@
               <option value="Separated">Separated</option>
               <option value="Divorced">Divorced</option></select
             ><br />
-            Address: <input type="text" name="address" id="txtResAddress" />
-            <br />
+            Address:
+            <input type="text" name="address" id="txtResAddress" /><br />
             Employment Status:
             <input
               type="radio"
@@ -193,32 +192,29 @@
               value="Unemployed"
             />UNEMPLOYED<br /><br />
             Birth Date:
-            <input type="date" name="birth_date" id="ResBirthDate" /> <br />
+            <input type="date" name="birth_date" id="ResBirthDate" /><br />
             Place of Birth:
-            <input type="text" name="place_of_birth" id="txtResBirthPlace" />
-            <br />
+            <input
+              type="text"
+              name="place_of_birth"
+              id="txtResBirthPlace"
+            /><br />
             Age: <input type="number" name="age" id="age" /><br />
             Religion:
             <input type="text" name="religion" id="txtResReligion" /><br />
             Voter Status:
+            <input type="radio" name="voter_status" value="Active" />ACTIVE
             <input
-              type="checkbox"
-              id="voterStatus"
-              name="voter_status"
-              value="Active"
-            />ACTIVE
-            <input
-              type="checkbox"
-              id="voterStatus"
+              type="radio"
               name="voter_status"
               value="Inactive"
             />INACTIVE<br /><br />
-            <button id="btnsaveInfo" name="save">Save</button>
-            <button id="btnupdateInfo">Update</button>
-            <button id="btndeleteInfo">Delete</button>
-            <button id="btnclearAll">Clear All Records</button><br /><br />
+            <button type="submit" id="btnsaveInfo" name="save">Save</button>
+            <button type="button" id="btnupdateInfo">Update</button>
+            <button type="button" id="btndeleteInfo">Delete</button>
+            <button type="button" id="btnclearAll">Clear All Records</button
+            ><br /><br />
           </form>
-
           <table id="residentsTable">
             <thead>
               <tr>
