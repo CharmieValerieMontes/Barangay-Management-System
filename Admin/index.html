@@ -33,6 +33,7 @@
 
     <main>
       <div class="container">
+
         <div class="card homePage">
           <center><h2>Welcome to Barangay Management System</h2></center>
           <center>
@@ -44,14 +45,14 @@
         </div>
 
         <div class="card blotterPage">
-          <form action="blotter.php" method="post" enctype="multipart/form-data"></form>
+          <form action="blotter.php" method="post" enctype="multipart/form-data">
           <h1>BLOTTER</h1>
           <div class="inputdiv">
             Complainant's Full Name:
-            <input type="text" id="txtComplainantName" /><br />
+            <input type="text" name="complainant" id="txtComplainantName" /><br />
             Complainant's Address:
-            <input type="text" id="txtComplainantAddress" /><br />
-            Accusation: <input type="text" id="txtAccusation" /><br />
+            <input type="text" name ="id" id="txtComplainantAddress" /><br />
+            Accusation: <input type="text" name="accusation" id="txtAccusation" /><br />
             Record Status:
             <input
               type="radio"
@@ -70,6 +71,9 @@
             <button id="btnDelete">Delete</button>
             <button id="btnClear">Clear All Records</button>
           </div>
+        </form>
+
+
           <div class="tbldiv">
             <table border="1px" id="tblRecords"></table>
           </div>

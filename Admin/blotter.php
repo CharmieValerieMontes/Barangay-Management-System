@@ -1,60 +1,36 @@
 <?php
-var_dump($_POST); // Debug statement to see the submitted form data
-// Establish connection to MySQL database
-$servername = "localhost";
+// Database connection details
+$host = "localhost";
 $username = "root";
 $password = "";
-$dbname = "barangay";
+$database = "barangay";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Connect to MySQL server
+$conn = mysqli_connect($host, $username, $password, $database);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 
-// Check if the form has been submitted
+// Process form data if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check which button was clicked
-    if (isset($_POST["btnSave"])) {
-        // Insert new blotter record
-        $complainantName = $_POST["txtComplainantName"];
-        $complainantAddress = $_POST["txtComplainantAddress"];
-        $accusation = $_POST["txtAccusation"];
-        $status = $_POST["rdoStatus"];
+    // Retrieve form data
+    $complainantName = $_POST['complainant'];
+    $complainantAddress = $_POST['address'];
+    $accusation = $_POST['accusation'];
+    $recordStatus = $_POST['rdoStatus'];
 
-        $sql = "INSERT INTO blotter (complainant_name, complainant_address, accusation, status)
-                VALUES ('$complainantName', '$complainantAddress', '$accusation', '$status')";
+    // SQL query to insert data into the database
+    $sql = "INSERT INTO blotter_records (complainant_name, complainant_address, accusation, record_status)
+            VALUES ('$complainantName', '$complainantAddress', '$accusation', '$recordStatus')";
 
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-    } elseif (isset($_POST["btnUpdate"])) {
-        // Update existing blotter record
-        // Add your update logic here
-    } elseif (isset($_POST["btnDelete"])) {
-        // Delete existing blotter record
-        // Add your delete logic here
-    } elseif (isset($_POST["btnClear"])) {
-        // Clear all records (if needed)
-        // Add your clear logic here
+    if (mysqli_query($conn, $sql)) {
+        echo "Record saved successfully.";
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
- // Execute the statement
- if (mysqli_stmt_execute($stmt)) {
-    echo "Record saved successfully.";
-} else {
-    echo "Error: " . mysqli_stmt_error($stmt);
 }
-// Close the statement and connection
-mysqli_stmt_close($stmt);
+
+// Close the database connection
 mysqli_close($conn);
-} else {
-echo "No form data submitted.";
-}
-
-
-// Close MySQL connection
-$conn->close();
-
