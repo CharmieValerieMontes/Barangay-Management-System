@@ -437,15 +437,29 @@ function generateBarangayClearance() {
     let address = $('#txtClearanceAddress').val();
     let voterStatus = $('input[name="voterStatus"]:checked').val();
     let purpose = $('#purpose').val();
+    let currentDate = new Date();
+    let issuedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
 
     // Create the barangay clearance certificate text based on the form data
-    let clearanceText = `BARANGAY CLEARANCE
+    let clearanceText = `
+        Republic of the Philippines
+        Province of Rizal
+        Municipality of Cainta
+        Barangay San Andres
+        
+        Barangay Clearance
 
-    This is to certify that ${name}, a ${sex}, residing at ${address}, is a ${voterStatus} voter in this barangay.
+        To whom it may concern:
 
-    Purpose of the clearance: ${purpose}
+        This is to certify that ${name}, of legal age is Bonafede resident of San Andres, Cainta, Rizal and is known to me as a person with a good moral character and has no derogatory records before this office as of this date.
 
-    Issued on: ${new Date().toDateString()}`;
+        This certification is being issued upon request of the above-name person for the purpose of ${purpose}
+
+        Issued this ${currentDate.getDate()} day of ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()} at barangay San Andres, Cainta, Rizal.
+
+        Hon. Mark Reyes L.
+        Punong Barangay
+    `;
 
     // Display the certificate text
     console.log(clearanceText);
