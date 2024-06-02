@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -6,6 +5,8 @@
     <title>Barangay</title>
     <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
     <script src="script.js"></script>
   </head>
   <body>
@@ -33,7 +34,6 @@
 
     <main>
       <div class="container">
-
         <div class="card homePage">
           <center><h2>Welcome to Barangay Management System</h2></center>
           <center>
@@ -45,34 +45,42 @@
         </div>
 
         <div class="card blotterPage">
-          <form action="blotter.php" method="post" enctype="multipart/form-data">
-          <h1>BLOTTER</h1>
-          <div class="inputdiv">
-            Complainant's Full Name:
-            <input type="text" name="complainant" id="txtComplainantName" /><br />
-            Complainant's Address:
-            <input type="text" name ="id" id="txtComplainantAddress" /><br />
-            Accusation: <input type="text" name="accusation" id="txtAccusation" /><br />
-            Record Status:
-            <input
-              type="radio"
-              id="unsettled"
-              name="rdoStatus"
-              value="Unsettled"
-            />UNSETTLED
-            <input
-              type="radio"
-              id="settled"
-              name="rdoStatus"
-              value="Settled"
-            />SETTLED<br /><br />
-            <button id="btnSave">Save</button>
-            <button id="btnUpdate">Update</button>
-            <button id="btnDelete">Delete</button>
-            <button id="btnClear">Clear All Records</button>
-          </div>
-        </form>
-
+          <form
+            action="blotter.php"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <h1>BLOTTER</h1>
+            <div class="inputdiv">
+              Complainant's Full Name:
+              <input
+                type="text"
+                name="complainant"
+                id="txtComplainantName"
+              /><br />
+              Complainant's Address:
+              <input type="text" name="id" id="txtComplainantAddress" /><br />
+              Accusation:
+              <input type="text" name="accusation" id="txtAccusation" /><br />
+              Record Status:
+              <input
+                type="radio"
+                id="unsettled"
+                name="rdoStatus"
+                value="Unsettled"
+              />UNSETTLED
+              <input
+                type="radio"
+                id="settled"
+                name="rdoStatus"
+                value="Settled"
+              />SETTLED<br /><br />
+              <button id="btnSave">Save</button>
+              <button id="btnUpdate">Update</button>
+              <button id="btnDelete">Delete</button>
+              <button id="btnClear">Clear All Records</button>
+            </div>
+          </form>
 
           <div class="tbldiv">
             <table border="1px" id="tblRecords"></table>
@@ -86,35 +94,19 @@
           <input type="radio" name="sex" value="Female" />FEMALE<br /><br />
           Address: <input type="text" id="txtClearanceAddress" /><br />
           Voter Status:
-          <input
-            type="checkbox"
-            id="voterStatus"
-            name="voterStatus"
-            value="Active"
-          />ACTIVE
-          <input
-            type="checkbox"
-            id="voterStatus"
-            name="voterStatus"
-            value="Inactive"
-          />INACTIVE<br /><br />
+          <input type="checkbox" id="voterStatus" name="voterStatus" value="Active" />ACTIVE
+          <input type="checkbox" id="voterStatus" name="voterStatus" value="Inactive" />INACTIVE<br /><br />
           Purpose:
           <select id="purpose">
-            <option value="Getting a Job">Getting a Job</option>
-            <option value="Applying for a Business Permit">
-              Applying for a Business Permit
-            </option>
-            <option value="Opening a Bank Account">
-              Opening a Bank Account
-            </option>
-            <option value="Applying for Another ID">
-              Applying for Another ID
-            </option></select
-          ><br />
-          <button id="btnSave">Save</button>
+              <option value="Getting a Job">Getting a Job</option>
+              <option value="Applying for a Business Permit">Applying for a Business Permit</option>
+              <option value="Opening a Bank Account">Opening a Bank Account</option>
+              <option value="Applying for Another ID">Applying for Another ID</option>
+          </select><br />
+          <button id="btnSave" onclick="generateBarangayClearance()">Save</button>
           <button id="btnUpdate">Update</button>
           <button id="btnDelete">Delete</button>
-        </div>
+      </div>
 
         <div class="card indigencyPage">
           <h1>INDIGENCY</h1>
@@ -220,7 +212,7 @@
             <button type="button" id="btnclearAll">Clear All Records</button
             ><br /><br />
           </form>
-          
+
           <table id="residentsTable">
             <thead>
               <tr>
@@ -242,7 +234,6 @@
               <!-- Table rows will be dynamically added here -->
             </tbody>
           </table>
-        
         </div>
 
         <br />

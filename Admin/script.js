@@ -64,33 +64,35 @@ $(document).ready(function () {
 
   function saveBlotterRecord() {
     // Retrieve form data
-    let complainant = $('#txtComplainantName').val();
-    let address = $('#txtComplainantAddress').val();
-    let accusation = $('#txtAccusation').val();
+    let complainant = $("#txtComplainantName").val();
+    let address = $("#txtComplainantAddress").val();
+    let accusation = $("#txtAccusation").val();
     let recordStatus = $('input[name="rdoStatus"]:checked').val();
 
     // AJAX request to save data to the database
     $.ajax({
-        url: 'blotter.php',
-        method: 'POST',
-        data: {
-            complainant: complainant,
-            address: address,
-            accusation: accusation,
-            rdoStatus: recordStatus
-        },
-        success: function(response) {
-            console.log(response); // Log the response from the server
-            // Optionally, you can perform additional actions after successful submission
-        },
-        error: function(xhr, status, error) {
-            console.error(error); // Log any errors that occur during the AJAX request
-        }
+      url: "blotter.php",
+      method: "POST",
+      data: {
+        complainant: complainant,
+        address: address,
+        accusation: accusation,
+        rdoStatus: recordStatus,
+      },
+      success: function (response) {
+        console.log(response); // Log the response from the server
+        // Optionally, you can perform additional actions after successful submission
+      },
+      error: function (xhr, status, error) {
+        console.error(error); // Log any errors that occur during the AJAX request
+      },
     });
-}
+  }
 
-// Event binding for saving the blotter record
-document.getElementById("btnSave").addEventListener("click", saveBlotterRecord);
+  // Event binding for saving the blotter record
+  document
+    .getElementById("btnSave")
+    .addEventListener("click", saveBlotterRecord);
 
   $(".clearance").click(function () {
     showPage(".clearancePage");
@@ -210,7 +212,6 @@ document.getElementById("btnSave").addEventListener("click", saveBlotterRecord);
     deleteRow();
   });
 });
-
 
 function displayItems() {
   let items = JSON.parse(localStorage.getItem("items")) || [];
@@ -426,4 +427,40 @@ function deleteRow() {
 
   // Remove the row from the table
   selectedRow.remove();
+}
+
+
+function generateBarangayClearance() {
+    // Retrieve form data
+    let name = $('#txtClearanceName').val();
+    let sex = $('input[name="sex"]:checked').val();
+    let address = $('#txtClearanceAddress').val();
+    let voterStatus = $('input[name="voterStatus"]:checked').val();
+    let purpose = $('#purpose').val();
+
+    // Create the barangay clearance certificate text based on the form data
+    let clearanceText = `BARANGAY CLEARANCE
+
+    This is to certify that ${name}, a ${sex}, residing at ${address}, is a ${voterStatus} voter in this barangay.
+
+    Purpose of the clearance: ${purpose}
+
+    Issued on: ${new Date().toDateString()}`;
+
+    // Display the certificate text
+    console.log(clearanceText);
+
+    // Save the certificate text to a file (you can customize the file-saving logic)
+    saveCertificateToFile(clearanceText);
+}
+
+function saveCertificateToFile(certificateText) {
+    // Example: Save the certificate text to a file named 'barangay_clearance.txt'
+    let fileBlob = new Blob([certificateText], { type: 'text/plain' });
+    let fileURL = URL.createObjectURL(fileBlob);
+
+    let downloadLink = document.createElement('a');
+    downloadLink.href = fileURL;
+    downloadLink.download = 'barangay_clearance.txt';
+    downloadLink.click();
 }
