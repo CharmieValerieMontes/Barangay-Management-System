@@ -41,7 +41,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Clear all records (if needed)
         // Add your clear logic here
     }
+ // Execute the statement
+ if (mysqli_stmt_execute($stmt)) {
+    echo "Record saved successfully.";
+} else {
+    echo "Error: " . mysqli_stmt_error($stmt);
 }
+// Close the statement and connection
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
+} else {
+echo "No form data submitted.";
+}
+
 
 // Close MySQL connection
 $conn->close();

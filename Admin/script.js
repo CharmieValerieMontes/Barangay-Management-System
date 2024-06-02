@@ -61,6 +61,25 @@ $(document).ready(function() {
         //to load informations
         displayItems();
     });
+    // Save the data to the database using AJAX
+    $.ajax({
+        url: 'blotter.php',
+        method: 'POST',
+        data: {
+            Name: txtComplainantName,
+            Address: txtComplainantAddress,
+            Accusation: txtAccusation,
+            rdoStatus: unsettled,
+        },
+        success: function(response) {
+            console.log(response); // Log the response from the server
+            clearResidentData(); // Clear the form fields after successful submission
+        },
+        error: function(xhr, status, error) {
+            console.error(error); // Log any errors that occur during the AJAX request
+        }
+    });
+}
 
     $(".clearance").click(function() {
         showPage(".clearancePage");
