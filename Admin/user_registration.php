@@ -63,6 +63,9 @@
         
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
+
+        <label for="picture">Upload Picture:</label>
+        <input type="file" id="picture" name="picture" accept="image/*" required>
         
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
@@ -85,8 +88,7 @@
             <option value="married">Married</option>
         </select>
         
-        <label for="picture">Upload Picture:</label>
-        <input type="file" id="picture" name="picture" accept="image/*" required>
+        
         
         <input type="submit" name="register" value="Register">
     </form>
