@@ -1,98 +1,100 @@
 $(document).ready(function () {
-  $("header, nav, img, footer, hr, fieldset").hide();
-  showPage(".loginPage");
-
-  $(".loginPage button").click(function () {
-    let username = $("#txtUsername").val();
-    let password = $("#txtPassword").val();
-    if (username == "admin" && password == "admin123") {
-      $("header, nav, footer, hr, fieldset").show();
-      showPage(".homePage");
-      $(".loginPage").hide();
-    } else {
-      alert("Invalid input! Please try again.");
-    }
-  });
-
-  $("#chkview").click(function () {
-    let isChecked = $(this).is(":checked");
-    if (isChecked) {
-      $("#txtPassword").attr("type", "text");
-      $("#chkview").next("span").text("Hide");
-    } else {
-      $("#txtPassword").attr("type", "password");
-      $("#chkview").next("span").text("Show");
-    }
-  });
-
-  let links = $("nav a");
-
-  links.on("click", function () {
-    links.removeClass("active");
-    $(this).addClass("active");
-  });
-
-  function showPage(page) {
-    $(
-      "main .container .card, main .loginPage, main .social, main hr, main fieldset, main .remove"
-    ).hide();
-    $(page).show();
-    if (page === ".homePage") {
-      $("img").show();
-      $(".social").show();
-      $("hr").show();
-      $("fieldset").show();
-      $(".remove").show();
-    } else {
-      $("img").hide();
-      $(".social").hide();
-      $("hr").hide();
-      $("fieldset").hide();
-      $(".remove").hide();
-    }
-  }
-
-  $(".home").click(function () {
-    showPage(".homePage");
-  });
-
-  $(".blotter").click(function () {
-    showPage(".blotterPage");
-    //to load informations
-    displayItems();
-  });
-
-  function saveBlotterRecord() {
-    // Retrieve form data
-    let complainant = $("#txtComplainantName").val();
-    let address = $("#txtComplainantAddress").val();
-    let accusation = $("#txtAccusation").val();
-    let recordStatus = $('input[name="rdoStatus"]:checked').val();
-
-    // AJAX request to save data to the database
-    $.ajax({
-      url: "blotter.php",
-      method: "POST",
-      data: {
-        complainant: complainant,
-        address: address,
-        accusation: accusation,
-        rdoStatus: recordStatus,
-      },
-      success: function (response) {
-        console.log(response); // Log the response from the server
-        // Optionally, you can perform additional actions after successful submission
-      },
-      error: function (xhr, status, error) {
-        console.error(error); // Log any errors that occur during the AJAX request
-      },
+    $("header, nav, img, footer, hr, fieldset").hide();
+    showPage(".loginPage");
+  
+    $(".loginPage button").click(function () {
+      let username = $("#txtUsername").val();
+      let password = $("#txtPassword").val();
+      if (username == "admin" && password == "admin123") {
+        $("header, nav, footer, hr, fieldset").show();
+        showPage(".homePage");
+        $(".loginPage").hide();
+      } else {
+        alert("Invalid input! Please try again.");
+      }
     });
-  }
+  
+    $("#chkview").click(function () {
+      let isChecked = $(this).is(":checked");
+      if (isChecked) {
+        $("#txtPassword").attr("type", "text");
+        $("#chkview").next("span").text("Hide");
+      } else {
+        $("#txtPassword").attr("type", "password");
+        $("#chkview").next("span").text("Show");
+      }
+    });
+  
+    let links = $("nav a");
+  
+    links.on("click", function () {
+      links.removeClass("active");
+      $(this).addClass("active");
+    });
+  
+    function showPage(page) {
+      $(
+        "main .container .card, main .loginPage, main .social, main hr, main fieldset, main .remove"
+      ).hide();
+      $(page).show();
+      if (page === ".homePage") {
+        $("img").show();
+        $(".social").show();
+        $("hr").show();
+        $("fieldset").show();
+        $(".remove").show();
+      } else {
+        $("img").hide();
+        $(".social").hide();
+        $("hr").hide();
+        $("fieldset").hide();
+        $(".remove").hide();
+      }
+    }
+  
+    $(".home").click(function () {
+      showPage(".homePage");
+    });
+  
+    $(".blotter").click(function () {
+      showPage(".blotterPage");
+      //to load informations
+      displayItems();
+    });
+  
+    function saveBlotterRecord(event) {
+      event.preventDefault(); // Prevent default form submission behavior
+  
+      // Retrieve form data
+      let complainant = $('#txtComplainantName').val();
+      let address = $('#txtComplainantAddress').val();
+      let accusation = $('#txtAccusation').val();
+      let recordStatus = $('input[name="rdoStatus"]:checked').val();
+  
+      // AJAX request to save data to the database
+      $.ajax({
+          url: 'blotter.php',
+          method: 'POST',
+          data: {
+              complainant: complainant,
+              address: address,
+              accusation: accusation,
+              rdoStatus: recordStatus
+          },
+          success: function(response) {
+              console.log(response); // Log the response from the server
+              // Optionally, you can perform additional actions after successful submission
+          },
+          error: function(xhr, status, error) {
+              console.error(error); // Log any errors that occur during the AJAX request
+              // Optionally, provide feedback to the user about the error
+          }
+      });
+    }
+  
+    // Event binding for saving the blotter record
+    $('#btnSave').click(saveBlotterRecord);
 
-  // Event binding for saving the blotter record
-  document
-    .getElementById("btnSave")
-    .addEventListener("click", saveBlotterRecord);
 
   $(".clearance").click(function () {
     showPage(".clearancePage");
@@ -120,10 +122,7 @@ $(document).ready(function () {
 
   //Script for Blotter tab
 
-  $("#btnSave").click(function () {
-    createItem();
-    clearFields();
-  });
+  
 
   $("#btnUpdate").click(function () {
     let selectedRow = $("#tblRecords tr.selected");
@@ -162,105 +161,17 @@ $(document).ready(function () {
 
   // Event handler for the submit button
   $("#btnsaveInfo").click(function () {
-    saveResidentData();
     displayData();
     clearResidentData();
   });
-  //Event handler for clear button
-  $("#btnclearAll").click(function () {
-    deleteAllData();
-  });
-  $("#btnupdateInfo").click(function () {
-    let selectedRow = $("#residentsTable tbody tr.selected");
-    if (selectedRow.length === 0) {
-      alert("Please select a row to update.");
-      return;
-    }
-    let lastName = selectedRow.find("td:eq(0)").text();
-    let firstName = selectedRow.find("td:eq(1)").text();
-    let middleName = selectedRow.find("td:eq(2)").text();
-    let sex = selectedRow.find("td:eq(3)").text();
-    let maritalStatus = selectedRow.find("td:eq(4)").text();
-    let address = selectedRow.find("td:eq(5)").text();
-    let employmentStatus = selectedRow.find("td:eq(6)").text();
-    let birthDate = selectedRow.find("td:eq(7)").text();
-    let birthPlace = selectedRow.find("td:eq(8)").text();
-    let age = selectedRow.find("td:eq(9)").text();
-    let religion = selectedRow.find("td:eq(10)").text();
-    let voterStatus = selectedRow.find("td:eq(11)").text();
-
-    $("#txtResLName").val(lastName);
-    $("#txtResFName").val(firstName);
-    $("#txtResMName").val(middleName);
-    $('input[name="sex"][value="' + sex + '"]').prop("checked", true);
-    $("#maritalStatus").val(maritalStatus);
-    $("#txtResAddress").val(address);
-    $('input[name="employmentStatus"][value="' + employmentStatus + '"]').prop(
-      "checked",
-      true
-    );
-    $("#ResBirthDate").val(birthDate);
-    $("#txtResBirthPlace").val(birthPlace);
-    $("#age").val(age);
-    $("#txtResReligion").val(religion);
-    $('input[name="voterStatus"][value="' + voterStatus + '"]').prop(
-      "checked",
-      true
-    );
-  });
-  $("#btndeleteInfo").click(function () {
-    deleteRow();
-  });
+ 
+  
 });
 
-function displayItems() {
-  let items = JSON.parse(localStorage.getItem("items")) || [];
-  let table = $("#tblRecords");
-  table.empty();
-  table.append(
-    "<tr><th>Case ID</th><th>Complainant's Full Name</th><th>Complainant's Address</th><th>Accusation</th><th>Record Status</th></tr>"
-  );
-  for (let i = 0; i < items.length; i++) {
-    let item = items[i];
-    table.append(
-      "<tr><td>" +
-        (i + 1) +
-        "</td><td>" +
-        item.complainantName +
-        "</td><td>" +
-        item.complainantAddress +
-        "</td><td>" +
-        item.accusation +
-        "</td><td>" +
-        item.status +
-        "</td></tr>"
-    );
-  }
-  table
-    .find("tr")
-    .not(":first")
-    .click(function () {
-      table.find("tr").removeClass("selected greyish");
-      $(this).addClass("selected");
-    });
-}
 
-//TEMPORARY lang tong button, naiipon kasi sa storage yung trials na input, para mareset lang ganern
-function clearRecords() {
-  localStorage.clear();
-  displayItems();
-}
 
-function clearFields() {
-  //values are set to null to clear textboxes
-  let complainantName = $("#txtComplainantName").val(null);
-  let complainantAddress = $("#txtComplainantAddress").val(null);
-  let accusation = $("#txtAccusation").val(null);
-  //set the value of radio buttons to false to remove selection
-  let rdoStatus = $('input[name="rdoStatus"]').prop("checked", false);
-}
 
-displayItems();
+
 
 //Script for New Residence Tab
 function imageUpload() {
@@ -294,6 +205,7 @@ function imageUpload() {
     reader.readAsDataURL(file);
   });
 }
+
 function saveResidentData() {
   let lastName = $("#txtResLName").val().trim();
   let firstName = $("#txtResFName").val().trim();
@@ -356,125 +268,47 @@ function saveResidentData() {
   });
 }
 
+
 function displayData() {
-  let residents = JSON.parse(localStorage.getItem("residents")) || [];
-  let tableBody = $("#residentsTable tbody");
-  tableBody.empty();
+  $.ajax({
+    url: 'db.php',
+    method: 'GET',
+    dataType: 'json', // Expect JSON response
+    success: function(response) {
+      console.log("Data received:", response);
+      let residents = response.data || []; // Assuming the data is in a 'data' property
+      let tableBody = $('#residentsTable tbody');
+      tableBody.empty(); // Clear existing table rows
 
-  // Iterate through residents and create table rows
-  residents.forEach(function (resident) {
-    let row = $("<tr>");
-    row.append($("<td>").text(resident.lastName));
-    row.append($("<td>").text(resident.firstName));
-    row.append($("<td>").text(resident.middleName));
-    row.append($("<td>").text(resident.sex));
-    row.append($("<td>").text(resident.maritalStatus));
-    row.append($("<td>").text(resident.address));
-    row.append($("<td>").text(resident.employmentStatus));
-    row.append($("<td>").text(resident.birthDate));
-    row.append($("<td>").text(resident.birthPlace));
-    row.append($("<td>").text(resident.age));
-    row.append($("<td>").text(resident.religion));
-    row.append($("<td>").text(resident.voterStatus));
+      // Iterate through residents and create table rows
+      residents.forEach(function(resident) {
+        let row = $('<tr>');
+        row.append($('<td>').text(resident.lastName));
+        row.append($('<td>').text(resident.firstName));
+        row.append($('<td>').text(resident.middleName));
+        row.append($('<td>').text(resident.sex));
+        row.append($('<td>').text(resident.maritalStatus));
+        row.append($('<td>').text(resident.address));
+        row.append($('<td>').text(resident.employmentStatus));
+        row.append($('<td>').text(resident.birthDate));
+        row.append($('<td>').text(resident.birthPlace));
+        row.append($('<td>').text(resident.age));
+        row.append($('<td>').text(resident.religion));
+        row.append($('<td>').text(resident.voterStatus));
 
-    row.click(function () {
-      $("#residentsTable tbody tr").removeClass("selected"); // Remove 'selected' class from all rows
-      row.addClass("selected"); // Add 'selected' class to the clicked row
-    });
-    tableBody.append(row);
+        // Add click event to highlight selected row
+        row.click(function() {
+          $('#residentsTable tbody tr').removeClass('selected'); // Remove 'selected' class from all rows
+          row.addClass('selected'); // Add 'selected' class to the clicked row
+        });
+
+        tableBody.append(row); // Append the row to the table body
+      });
+    },
+    error: function(xhr, status, error) {
+      console.error(error); // Log any errors that occur during the AJAX request
+    }
   });
 }
-// Function to clear all input fields
-function clearResidentData() {
-  $("#imagePreview").hide();
-  $("#txtResLName").val("");
-  $("#txtResFName").val("");
-  $("#txtResMName").val("");
-  $('input[name="sex"]').prop("checked", false);
-  $("#maritalStatus").val("");
-  $("#txtResAddress").val("");
-  $('input[name="employmentStatus"]').prop("checked", false);
-  $("#ResBirthDate").val("");
-  $("#txtResBirthPlace").val("");
-  $("#age").val("");
-  $("#txtResReligion").val("");
-  $('input[name="voterStatus"]').prop("checked", false);
-}
-
-function deleteAllData() {
-  // Clear local storage
-  localStorage.removeItem("residents");
-
-  // Clear table body
-  $("#residentsTable tbody").empty();
-}
-
-function deleteRow() {
-  let selectedRow = $("#residentsTable tbody tr.selected");
-  if (selectedRow.length === 0) {
-    alert("Please select a row to delete.");
-    return;
-  }
-
-  let index = selectedRow.attr("data-index");
-  let residents = JSON.parse(localStorage.getItem("residents")) || [];
-
-  // Remove the resident at the specified index
-  residents.splice(index, 1);
-
-  // Update local storage
-  localStorage.setItem("residents", JSON.stringify(residents));
-
-  // Remove the row from the table
-  selectedRow.remove();
-}
 
 
-function generateBarangayClearance() {
-    // Retrieve form data
-    let name = $('#txtClearanceName').val();
-    let sex = $('input[name="sex"]:checked').val();
-    let address = $('#txtClearanceAddress').val();
-    let voterStatus = $('input[name="voterStatus"]:checked').val();
-    let purpose = $('#purpose').val();
-    let currentDate = new Date();
-    let issuedDate = `${currentDate.getDate()} ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()}`;
-
-    // Create the barangay clearance certificate text based on the form data
-    let clearanceText = `
-        Republic of the Philippines
-        Province of Rizal
-        Municipality of Cainta
-        Barangay San Andres
-        
-        Barangay Clearance
-
-        To whom it may concern:
-
-        This is to certify that ${name}, of legal age is Bonafede resident of San Andres, Cainta, Rizal and is known to me as a person with a good moral character and has no derogatory records before this office as of this date.
-
-        This certification is being issued upon request of the above-name person for the purpose of ${purpose}
-
-        Issued this ${currentDate.getDate()} day of ${currentDate.toLocaleString('default', { month: 'long' })} ${currentDate.getFullYear()} at barangay San Andres, Cainta, Rizal.
-
-        Hon. Mark Reyes L.
-        Punong Barangay
-    `;
-
-    // Display the certificate text
-    console.log(clearanceText);
-
-    // Save the certificate text to a file (you can customize the file-saving logic)
-    saveCertificateToFile(clearanceText);
-}
-
-function saveCertificateToFile(certificateText) {
-    // Example: Save the certificate text to a file named 'barangay_clearance.txt'
-    let fileBlob = new Blob([certificateText], { type: 'text/plain' });
-    let fileURL = URL.createObjectURL(fileBlob);
-
-    let downloadLink = document.createElement('a');
-    downloadLink.href = fileURL;
-    downloadLink.download = 'barangay_clearance.txt';
-    downloadLink.click();
-}
