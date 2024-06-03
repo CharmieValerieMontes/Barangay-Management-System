@@ -1,75 +1,92 @@
 <?php
-// Database connection details
-
-
-
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Database connection details
-    $host = "localhost";
+// Database connection
+$servername = "localhost";
 $username = "root";
 $password = "";
-$database = "barangay";
-    
+$dbname = "bms1";
 
-    // Connect to MySQL server
-    $conn = mysqli_connect($host, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    // Retrieve form data
-    $LastName = $_POST["last_name"] ?? '';
-    $FirstName = $_POST["first_name"] ?? '';
-    $MiddleName = $_POST["middle_name"] ?? '';
-    $sex = $_POST["sex"] ?? '';
-    $maritalStatus = $_POST["marital_status"] ?? '';
-    $address = $_POST["address"] ?? '';
-    $employmentStatus = $_POST["employment_status"] ?? '';
-    $birthDate = $_POST["birth_date"] ?? '';
-    $BirthPlace = $_POST["place_of_birth"] ?? '';
-    $age = $_POST["age"] ?? '';
-    $religion = $_POST["religion"] ?? '';
-    $voterStatus = $_POST["voter_status"] ?? '';
-
-    // SQL query to insert data into the database
-    $sql = "INSERT INTO residences (last_name, first_name, middle_name, sex, marital_status, address, employment_status, birth_date, place_of_birth, age, religion, voter_status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    // Prepare the SQL statement
-    $stmt = mysqli_prepare($conn, $sql);
-
-    if (!$stmt) {
-        die("SQL error: " . mysqli_error($conn));
-    }
-
-    // Bind parameters
-    mysqli_stmt_bind_param($stmt, "ssssssssssss",
-                           $LastName,
-                           $FirstName,
-                           $MiddleName,
-                           $sex,
-                           $maritalStatus,
-                           $address,
-                           $employmentStatus,
-                           $birthDate,
-                           $BirthPlace,
-                           $age,
-                           $religion,
-                           $voterStatus);
-
-    // Execute the statement
-    if (mysqli_stmt_execute($stmt)) {
-        echo "Record saved successfully.";
-    } else {
-        echo "Error: " . mysqli_stmt_error($stmt);
-    }
-
-    // Close the statement and connection
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-} else {
-    echo "No form data submitted.";
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
+
+// Function to save form data to the database
+function saveFormData($table, $data) {
+    global $conn;
+
+    $columns = implode(", ", array_keys($data));
+    $values = "'" . implode("', '", array_values($data)) . "'";
+
+    $sql = "INSERT INTO $table ($columns) VALUES ($values)";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+// Example usage to save BLOTTER form data
+$blotterData = array(
+    'complainant_name' => $_POST['txtComplainantName'],
+    'complainant_address' => $_POST['txtComplainantAddress'],
+    'accusation' => $_POST['txtAccusation'],
+    'record_status' => $_POST['rdoStatus']
+);
+
+saveFormData('BlotterRecords', $blotterData);
+
+// Repeat the above process for other forms (CLEARANCE, INDIGENCY, PERMIT, NEW RESIDENCE) with appropriate data and table names
+
+// Example usage to save CLEARANCE form data
+$clearanceData = array(
+    'name' => $_POST['txtClearanceName'],
+    'sex' => $_POST['sex'],
+    'address' => $_POST['txtClearanceAddress'],
+    'voter_status' => isset($_POST['voterStatus']) ? implode(", ", $_POST['voterStatus']) : "",
+    'purpose' => $_POST['purpose']
+);
+
+saveFormData('ClearanceRecords', $clearanceData);
+
+// Example usage to save INDIGENCY form data
+$indigencyData = array(
+    'name' => $_POST['txtIndigencyName'],
+    'address' => $_POST['txtIndigencyAddress'],
+    'voter_status' => isset($_POST['voterStatus']) ? implode(", ", $_POST['voterStatus']) : "",
+    'sex' => $_POST['sex'],
+    'years_of_living' => $_POST['yearsOfLiving'],
+    'purpose' => $_POST['purpose']
+);
+
+saveFormData('IndigencyRecords', $indigencyData);
+
+// Example usage to save PERMIT form data
+$permitData = array(
+    'owner_name' => $_POST['txtPermitOwnerName'],
+    'business_name' => $_POST['txtPermitBusinessName'],
+    'business_type' => $_POST['txtPermitBusinessType'],
+    'address' => $_POST['txtPermitAddress']
+);
+
+saveFormData('PermitRecords', $permitData);
+
+// Example usage to save NEW RESIDENCE form data
+$residenceData = array(
+    'last_name' => $_POST['last_name'],
+    'first_name' => $_POST['first_name'],
+    'middle_name' => $_POST['middle_name'],
+    'sex' => $_POST['sex'],
+    'marital_status' => $_POST['maritalStatus'],
+    'address' => $_POST['address'],
+    'employment_status' => $_POST['employmentStatus'],
+    'birth_date' => $_POST['birth_date'],
+    'place_of_birth' => $_POST['place_of_birth'],
+    'age' => $_POST['age'],
+    'religion' => $_POST['religion'],
+    'voter_status' => isset($_POST['voterStatus']) ? implode(", ", $_POST['voterStatus']) : ""
+);
+
+saveFormData('ResidenceRecords', $residenceData);
