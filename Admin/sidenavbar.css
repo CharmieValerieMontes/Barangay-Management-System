@@ -7,22 +7,24 @@ body {
   margin-left: 10%;
   margin-right: 50%;
 }
+
 .logo-profile-photo {
   width: auto;
   height: 80px;
-  
   margin-right: 50%;
 }
+
 .logo-text-photo {
   width: auto;
   height: 20px;
   margin-top: 500px;
   margin-right: 50%;
 }
+
 .text-profile {
   padding-top: 10px;
+  text-align: center;
 }
-
 .sidenav {
   height: 100%;
   width: 300px;
