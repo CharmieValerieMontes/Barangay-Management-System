@@ -38,7 +38,7 @@
 <section class="main">
     <h1>Barangay Certificate Request</h1>
 
-    <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+    <form action="cert_requestDB.php" method="post" class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <div class="col-md-4">
             <label for="firstname" class="form-label">First name</label>
             <input type="text" class="form-control" name="first_name" id="firstname" required>
@@ -50,7 +50,7 @@
         <div class="col-md-4">
             <label for="age" class="form-label">Age</label>
             <input type="age" class="form-control" name="age" id="age" required>
-            <div class="invalid-feedback">
+            <div class="iAnvalid-feedback">
                 Please provide age
             </div>
         </div>

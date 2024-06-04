@@ -1,4 +1,11 @@
-
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+$username = $_SESSION['username'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +45,7 @@
 
 <section class="main">
 
-<h2>Welcome to Your Dashboard</h2>
+<h2>Welcome to Your Dashboard, <?php echo $username; ?>!</h2>
     <p>This is your dashboard where you can view and manage your account information.</p>
 
 <div class="job">

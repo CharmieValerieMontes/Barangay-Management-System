@@ -36,6 +36,7 @@ if(isset($_POST['register'])){
     
     if ($conn->query($sql) === TRUE) {
         echo "Registration successful. You can now login with your credentials.";
+        header("Location: login.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
