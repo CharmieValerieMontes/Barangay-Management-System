@@ -1,6 +1,6 @@
 body {
     font-family: 'gg sans', sans-serif;
-    background-color: #fff8de;
+    background-color: #e6e6e6;
   }
   
   .logo-profile {
@@ -25,51 +25,32 @@ body {
 
   .sidenav {
     height: 100%;
-    width: 300px;
+    width: 200px;
     position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #013220;
+    background-color: #153e25;
     overflow-x: hidden;
     padding-top: 20px;
-    border-right: 20px solid #013220;
-    justify-content: center;
+    border-right: 20px solid #153e25;
+
   }
   ul {
     list-style-type: none;
   }
-
-  .logo-profile {
-    margin-left: 10%;
-    margin-right: 50%;
-}
-.logo-profile-photo {
-    width: auto;
-    height: 80px;
-    margin-right: 50%;
-}
-.logo-text-photo {
-    width: auto;
-    height: 20px;
-    margin-top: 500px;
-    margin-right: 50%;
-}
-.text-profile {
-    padding-top: 10px;
-    text-align: center;
-}
+  li {
+    width: 100%;
+  }
   .sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    color: #026943;
+    
     display: block;
     
   }
- .sidenav active hover{
-    color: #026943;
-  }
+  
   .sidenav a:hover {
     color: #f1f1f1;
     transition-duration: 0.4s;
@@ -80,17 +61,11 @@ body {
 }
 
   .main {
-    margin-left: 300px; 
+    margin-left: 220px; 
     font-size: 28px; 
     padding: 20px 50px;
     color: #153e25;
   }
-
-.main button{
-  background-color: #013220;
-  color: #f1f1f1;
-}
-  
   
 h1 {
     font-weight: bold;
@@ -111,15 +86,45 @@ h1 {
     color: var(--text-color);
     opacity: 100%;
     font-weight: bold;
-    background-color: #03794d;
+    background-color: #53f015;
     border-radius: 15px;
     color: #f1f1f1;
 }
 
+/* Add Users Form */
 
-.logo-profile img {
-  max-width: 150px; 
-  height: 150px;
-  align-self: center;
+.text-input-form {
+    max-width: 500px;
+    font-size: 25px;
+    margin-bottom: 20px;
 }
 
+.input-button {
+    width: 200px;
+    height: auto;
+    margin-top: 5px;
+    border-radius: 10px;
+    background-color: #1a4d2e;
+    border: 2px solid #1a4d2e;
+    color: #f1f1f1;
+    font-size: 20px;
+
+}
+
+.input-button:hover {
+    background-color: #f1f1f1;
+    color: #1a4d2e;
+    border-style: solid;
+    border: 2px solid #1a4d2e;
+    border-color: #1a4d2e ;
+    transition-duration: 0.4s;
+    
+}
+
+
+/*.input-button:hover {
+    background-color: #4f6f52;
+    color: #f1f1f1;
+    border: 10px;
+    transition-duration: 0.4s;
+}
