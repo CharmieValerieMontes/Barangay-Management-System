@@ -1,11 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
-$username = $_SESSION['username'];
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,17 +32,13 @@ $username = $_SESSION['username'];
                 <a href="logout.php" style="text-decoration: none;">Logout</a>
             </li>
         </div>
-        <li class="logo-profile ">
-            <img src="images\global_image\logo-grabage-text.png" alt="Profile Picture" class="logo-text-photo">
-        </li>
     </ul>
 </header>
 
 <section class="main">
-<center>
-<h2>Welcome to Your Dashboard, <?php echo $username; ?>!</h2>
+
+<h2>Welcome to Your Dashboard</h2>
     <p>This is your dashboard where you can view and manage your account information.</p>
-    </center>
 
 <div class="job">
     <img src= " https://philippinego.com/wp-content/uploads/2022/01/OCD-HIRING-1-1.png"alt="Barangay"/>

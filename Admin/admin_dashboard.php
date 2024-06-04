@@ -1,12 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit();
-}
-$username = $_SESSION['username'];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +36,7 @@ $username = $_SESSION['username'];
 
 <section class="main">
 <center>
-<h2>Welcome to Your Dashboard, <?php echo $username; ?>!</h2>
+<h2>Welcome to Your Dashboard</h2>
     <p>This is your dashboard where you can view and manage your account information.</p>
     </center>
 
@@ -85,6 +76,8 @@ $username = $_SESSION['username'];
             grid-gap: 20px;
             margin: 50px;
             max-width: 300px;
+            margin-left: 210px; 
+            
         }
         .button-container form {
             display: flex;

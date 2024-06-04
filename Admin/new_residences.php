@@ -40,16 +40,6 @@
         <h1>New Residences</h1>
 
         <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
-            <div class="col-md-6">
-                <label for="photo_upload" class="form-label">Upload Photo</label>
-                <input type="file" class="form-control" name="photo_upload" id="photo_upload" accept="image/*" required>
-                <small class="form-text text-muted">Please upload a JPEG or PNG image</small>
-                <div class="invalid-feedback">
-                    Please upload a photo
-                </div>
-            </div>
-            <br>
-            <br>
             <div class="col-md-4">
                 <label for="firstname" class="form-label">First name</label>
                 <input type="text" class="form-control" name="first_name" id="firstname" required>
@@ -72,7 +62,14 @@
                     Please provide adress
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <label for="photo_upload" class="form-label">Upload Photo</label>
+                <input type="file" class="form-control" name="photo_upload" id="photo_upload" accept="image/*" required>
+                <small class="form-text text-muted">Please upload a JPEG or PNG image</small>
+                <div class="invalid-feedback">
+                    Please upload a photo
+                </div>
+            </div>
             <div class="col-md-3">
                 <label for="contnum" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contnum" required>

@@ -31,9 +31,7 @@
                 <a href="logout.php" style="text-decoration: none;">Logout</a>
             </li>
         </div>
-        <li class="logo-profile ">
-            <img src="images\global_image\logo-grabage-text.png" alt="Profile Picture" class="logo-text-photo">
-        </li>
+
     </ul>
 </header>
 

@@ -17,7 +17,7 @@
     <ul class="sidenav">
         <!-- Profile Section -->
         <li class="logo-profile">
-            <img src="images\global_image\logo-grabage-G-circle.png" alt="Profile Picture" class="logo-profile-photo">
+            <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
             <div class="text-profile"><p style="color: #fff;">Resident</p></div>
         </li>
         <div class="tools">
@@ -32,9 +32,6 @@
                 <a href="logout.php" style="text-decoration: none;">Logout</a>
             </li>
         </div>
-        <li class="logo-profile ">
-            <img src="images\global_image\logo-grabage-text.png" alt="Profile Picture" class="logo-text-photo">
-        </li>
     </ul>
 </header>
 
