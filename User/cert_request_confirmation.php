@@ -17,27 +17,22 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Retrieve the saved data for the logged-in user
-$sql = "SELECT * FROM cert_requests WHERE username = '$logged_in_username'";
-$result = $conn->query($sql);
+// Process form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    // Add other form fields as needed...
 
-if ($result->num_rows > 0) {
-    echo "<table>";
-    echo "<tr><th>First Name</th><th>Last Name</th><th>Age</th><th>Address</th><th>Purpose</th></tr>";
-    while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>" . $row['first_name'] . "</td>";
-        echo "<td>" . $row['last_name'] . "</td>";
-        echo "<td>" . $row['age'] . "</td>";
-        echo "<td>" . $row['user_add'] . "</td>";
-        echo "<td>" . $row['user_purpose'] . "</td>";
-        echo "</tr>";
+    // Insert form data into the database, including the logged-in username
+    $sql = "INSERT INTO cert_requests (username, first_name, last_name) VALUES ('$logged_in_username', '$first_name', '$last_name')";
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    echo "</table>";
-} else {
-    echo "No data found for the logged-in user.";
 }
 
-// Close database connection
+// Close the database connection
 $conn->close();
 ?>
