@@ -60,7 +60,7 @@ $username = $_SESSION['username'];
             <form method="post">
                 <button type="submit" name="button2" class="button">BLOTTER</button>
             </form>
-            <form method="post">
+            <form method="post" action="id_generator.php">
                 <button type="submit" name="button3" class="button">REQUEST BARANGAY ID</button>
             </form>
             <form method="post" action="request_dashboard.php">
