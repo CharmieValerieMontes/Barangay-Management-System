@@ -16,7 +16,7 @@
     <ul class="sidenav">
         <!-- Profile Section -->
         <li class="logo-profile">
-            <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
             <div class="text-profile"><p style="color: #fff;">Resident</p></div>
         </li>
         <div class="tools">
@@ -36,6 +36,11 @@
 </header>
 
 <section class="main">
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
+
     <h1>Barangay Certificate Request</h1>
 
     <form action="cert_requestDB.php" method="post" class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
@@ -79,7 +84,7 @@
         </div>
     </form>
 </section>
-
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="formchecker.js"></script>

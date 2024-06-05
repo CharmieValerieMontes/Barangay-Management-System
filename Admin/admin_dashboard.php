@@ -27,7 +27,7 @@ $username = $_SESSION['username'];
             <!-- Profile Section -->
             <center>
                 <li class="logo-profile">
-                    <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+                    <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
                     <div class="text-profile">
                         <p style="color: #fff;">Admin</p>
                     </div>
@@ -48,9 +48,9 @@ $username = $_SESSION['username'];
     </header>
 
     <section class="main">
-    <div class="header-container">
-        <h2>Welcome to Your Dashboard</h2>
-        <p>This is your dashboard where you can view and manage your account information.</p>
+    <div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
     </div>
 
         <div class="button-container">

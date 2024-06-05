@@ -60,7 +60,7 @@ $conn->close();
     <header>
         <ul class="sidenav">
             <li class="logo-profile">
-                <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+                <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
                 <div class="text-profile">
                     <p style="color: #fff;">Resident</p>
                 </div>
@@ -78,6 +78,11 @@ $conn->close();
     </header>
 
     <section class="main">
+    <div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
+    
         <h1>User Profile</h1>
 
         <!-- User Picture -->
@@ -130,7 +135,7 @@ $conn->close();
             </div>
         </form>
     </section>
-
+  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="formchecker.js"></script>

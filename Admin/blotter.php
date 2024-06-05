@@ -26,7 +26,7 @@ $username = $_SESSION['username'];
         <!-- Profile Section -->
         <center>
         <li class="logo-profile">
-            <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
             <div class="text-profile"><p style="color: #fff;">Admin</p></div>
         </li>
         </center>
@@ -45,7 +45,11 @@ $username = $_SESSION['username'];
 </header>
 
 <section class="main">
-    <h1>Blotter</h1>
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
+   <center> <h1>Blotter</h1></center>
 
     <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <div class="col-md-4">
@@ -80,7 +84,7 @@ $username = $_SESSION['username'];
         </div>
         </div>
         <div class="button">
-            <button class="btn btn-primary" id="submit" type="submit">Submit form</button>
+           <center> <button class="btn btn-primary" id="submit" type="submit">Submit form</button></center>
         </div>
     </form>
 </section>

@@ -24,7 +24,7 @@ $username = $_SESSION['username'];
     <ul class="sidenav">
         <!-- Profile Section -->
         <li class="logo-profile">
-            <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
             <div class="text-profile"><p style="color: #fff;">Resident</p></div>
         </li>
         <div class="tools">
@@ -45,11 +45,14 @@ $username = $_SESSION['username'];
 
 <section class="main">
 
-<h2>Welcome to Your Dashboard, <?php echo $username; ?>!</h2>
-    <p>This is your dashboard where you can view and manage your account information.</p>
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
 
-    <h1> JOB HIRING! </h1>
+    
 <div class="job">
+<h1> JOB HIRING! </h1>
     <img src= " https://philippinego.com/wp-content/uploads/2022/01/OCD-HIRING-1-1.png"alt="Barangay"/>
     <img src= " https://philippinego.com/wp-content/uploads/2022/06/Copy-of-JOB-2-3.png"alt="Barangay"/>
     <img src= " https://th.bing.com/th/id/OIP.q5Pxl665RYlTQvBQ7W-n8gAAAA?rs=1&pid=ImgDetMain"alt="Barangay"/>
@@ -68,8 +71,8 @@ $username = $_SESSION['username'];
 }
 
 .job img {
-    max-width: 400px; 
-    height: 400px;
+    max-width: 300px; 
+    height: 300px;
     border: 5px solid #000; 
     border-radius: 10px; 
 }

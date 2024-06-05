@@ -17,7 +17,7 @@
         <!-- Profile Section -->
         <center>
         <li class="logo-profile">
-            <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
             <div class="text-profile"><p style="color: #fff;">Admin</p></div>
         </li>
         </center>
@@ -38,6 +38,12 @@
 </header>
 
 <section class="main">
+
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
+    
     <h1>Blotter</h1>
 
     <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
@@ -64,7 +70,7 @@
             </div>
         </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <label for="accusation" class="form-label">Accusation</label>
             <input type="text" class="form-control" name="user_accu" id="accusation" required>
             <div class="invalid-feedback">
@@ -77,7 +83,6 @@
         </div>
     </form>
 </section>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="formchecker.js"></script>

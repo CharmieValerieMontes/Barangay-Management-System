@@ -2,7 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="login.css">
-    <title>User Login</title>
+    <title>Login</title>
 </head>
 <body>
 <div class="center-container">
@@ -11,7 +11,7 @@
             <img src="logo.png" alt="logo">
         </div>
         <div class="login-container">
-    <h2>User Login</h2>
+    <h2>Login</h2>
     <form action="user_login.php" method="post">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br><br>
