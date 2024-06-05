@@ -11,11 +11,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the request ID is set in the URL
+// Check if the user data is set
 if (isset($_GET['id'])) {
     $request_id = $_GET['id'];
 
-    // Retrieve the certificate request from the database
+    // Retrieve the user data from the database based on request ID
     $sql = "SELECT * FROM cert_requests WHERE id=$request_id";
     $result = $conn->query($sql);
 
@@ -61,6 +61,16 @@ $conn->close();
         .cert-body {
             margin-top: 20px;
         }
+        .btn {
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -77,9 +87,13 @@ $conn->close();
         <div class="cert-body">
             <h2>Barangay Indigency</h2>
             <p>To whom it may concern,</p>
-            <p>This is to certify that <strong><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></strong>, legal age, is a bonafide resident of this barangay with address <strong><?php echo $user['user_add']; ?></strong>, and has been classified to be one of the INDIGENT FAMILIES of this barangay.</p>
-            <p>This certification is being issued for the purpose of <strong><?php echo $user['user_purpose']; ?></strong>.</p>
-            <p>This certification is being issued upon the request of the above-mentioned name for whatever legal purpose it may serve him/her best.</p>
+            <?php if (isset($user)) : ?>
+                <p>This is to certify that <strong><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></strong>, legal age, is a bonafide resident of this barangay with address <strong><?php echo $user['user_add']; ?></strong>, and has been classified to be one of the INDIGENT FAMILIES of this barangay.</p>
+                <p>This certification is being issued for the purpose of <strong><?php echo $user['user_purpose']; ?></strong>.</p>
+                <p>This certification is being issued upon the request of the above-mentioned name for whatever legal purpose it may serve him/her best.</p>
+            <?php else : ?>
+                <p>No user data found.</p>
+            <?php endif; ?>
         </div>
 
         <div class="cert-footer">
@@ -90,6 +104,29 @@ $conn->close();
             <p>Barangay Chairman</p>
             <p>Not valid without dry seal</p>
         </div>
+
+        <button class="btn" onclick="printCertificate()">Print</button>
+        <button class="btn" onclick="saveAsPDF()">Save as PDF</button>
     </div>
+
+    <script>
+        function printCertificate() {
+            window.print();
+        }
+
+        function saveAsPDF() {
+            var certContainer = document.querySelector('.cert-container');
+            var opt = {
+                margin:       0.5,
+                filename:     'barangay_certificate.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(certContainer).save();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </body>
 </html>
