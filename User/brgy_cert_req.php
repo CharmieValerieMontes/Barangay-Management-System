@@ -17,7 +17,7 @@
         <!-- Profile Section -->
         <li class="logo-profile">
             <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
-            <div class="text-profile"><p style="color: #fff;">Resident</p></div>
+            <div class="text-profile"><p style="color: #fff;"><?php echo $username; ?></p></div>
         </li>
         <div class="tools">
             <!-- Left Nav Bar -->
@@ -84,7 +84,7 @@
         </div>
     </form>
 </section>
-</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="formchecker.js"></script>

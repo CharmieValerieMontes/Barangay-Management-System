@@ -18,7 +18,7 @@
         <center>
         <li class="logo-profile">
             <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
-            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
+            <div class="text-profile"><p style="color: #fff;"><?php echo $username; ?></p></div>
         </li>
         </center>
         <div class="tools">

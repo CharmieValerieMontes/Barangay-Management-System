@@ -1,3 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="sidenavbar.css">
+    <title>Blotter</title> 
+</head>
+
+<body>
+<header>
+    <ul class="sidenav">
+        <!-- Profile Section -->
+        <center>
+        <li class="logo-profile">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
+            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
+        </li>
+        </center>
+        <div class="tools">
+                <!-- Left Nav Bar -->
+                <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
+                <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
+                <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
+                <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
+                <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
+                <li class="sidebar">
+                    <a href="logout.php" style="text-decoration: none;">Logout</a>
+                </li>
+            </div>
+    </ul>
+</header>
+
+<section class="main">
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+        table th, table td {
+            padding: 12px 15px;
+        }
+        table tbody tr {
+            border-bottom: 1px solid #dddddd;
+            background-color: #dcdcdc;
+        }
+        table tbody tr:nth-of-type(even) {
+            background-color: white;
+        }
+        table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        table tbody:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+    </head>
+<body>
 <?php
 // Database integration
 $servername = "localhost";

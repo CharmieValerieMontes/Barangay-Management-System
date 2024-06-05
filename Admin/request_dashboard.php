@@ -49,20 +49,44 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Your CSS file for styling -->
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="sidenavbar.css">
+    <title>Blotter</title> 
+</head>
+
+<body>
+<header>
+    <ul class="sidenav">
+        <!-- Profile Section -->
+        <center>
+        <li class="logo-profile">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
+            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
+        </li>
+        </center>
+        <div class="tools">
+                <!-- Left Nav Bar -->
+                <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
+                <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
+                <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
+                <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
+                <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
+                <li class="sidebar">
+                    <a href="logout.php" style="text-decoration: none;">Logout</a>
+                </li>
+            </div>
+    </ul>
+</header>
+
+<section class="main">
+<div class="header">
+<img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin: 20px 0;
-        }
         .requests {
             width: 80%;
             margin: 0 auto;
@@ -102,7 +126,6 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
 
     <div class="requests">
         <h2>Certificate Requests</h2>

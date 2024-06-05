@@ -61,9 +61,7 @@ $conn->close();
         <ul class="sidenav">
             <li class="logo-profile">
                 <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
-                <div class="text-profile">
-                    <p style="color: #fff;">Resident</p>
-                </div>
+                <div class="text-profile"><p style="color: #fff;"><?php echo $username; ?></p></div>
             </li>
             <div class="tools">
                 <li class="sidebar"><a href="dashboard.php" style="text-decoration: none;">Home </a></li>
