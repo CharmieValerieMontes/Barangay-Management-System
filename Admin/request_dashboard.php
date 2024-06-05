@@ -148,13 +148,6 @@ $result = $conn->query($sql);
         </table>
     </div>
 
-    <script>
-        // Function to remove the row from the table after update
-        function removeRow(requestId) {
-            var row = document.getElementById("row_" + requestId);
-            row.parentNode.removeChild(row);
-        }
-    </script>
 
     <?php
     // Close database connection
