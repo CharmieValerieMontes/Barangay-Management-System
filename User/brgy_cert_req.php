@@ -17,7 +17,7 @@
         <!-- Profile Section -->
         <li class="logo-profile">
             <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
-            <div class="text-profile"><p style="color: #fff;"><?php echo $username; ?></p></div>
+            <div class="text-profile"><p style="color: #fff;">Resident</p></div>
         </li>
         <div class="tools">
             <!-- Left Nav Bar -->

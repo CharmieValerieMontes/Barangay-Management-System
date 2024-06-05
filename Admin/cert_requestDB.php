@@ -7,11 +7,11 @@ $dbname = "barangay_db";
 
 // Start the session
 session_start();
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
-
 
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($conn->query($sql) === TRUE) {
             // Redirect the user to the confirmation page
+
             header("Location: admin_cert.php");
             exit;
         } else {
