@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+$username = $_SESSION['username'];
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +49,7 @@
     </div>
     <center><h1>Barangay Certificate Request</h1></center>
 
-    <form action=".../User/cert_requestDB.php" method="post" class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+    <form action="cert_requestDB.php" method="post" class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <div class="col-md-4">
             <label for="firstname" class="form-label">First name</label>
             <input type="text" class="form-control" name="first_name" id="firstname" required>
