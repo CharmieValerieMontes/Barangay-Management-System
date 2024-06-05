@@ -23,9 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE cert_requests SET status='$new_status' WHERE id=$request_id";
 
         if ($conn->query($sql) === TRUE) {
-            // Redirect back to the same page
-            header("Location: ".$_SERVER['PHP_SELF']);
-            exit();
+            // Generate certificate if status is approved
+            if ($new_status == 'Approved') {
+                header("Location: cert_outine.php?id=$request_id");
+
+                exit();
+            } else {
+                // Redirect back to the same page
+                header("Location: ".$_SERVER['PHP_SELF']);
+                exit();
+            }
         } else {
             echo "Error updating status: " . $conn->error;
         }
@@ -125,9 +132,9 @@ $result = $conn->query($sql);
                     echo "<form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
                     echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
                     echo "<select name='new_status'>";
-                    echo "<option value='Pending'>Pending</option>";
-                    echo "<option value='Approved'>Approved</option>";
-                    echo "<option value='Rejected'>Rejected</option>";
+                    echo "<option value='Pending'" . ($row['status'] == 'Pending' ? ' selected' : '') . ">Pending</option>";
+                    echo "<option value='Approved'" . ($row['status'] == 'Approved' ? ' selected' : '') . ">Approved</option>";
+                    echo "<option value='Rejected'" . ($row['status'] == 'Rejected' ? ' selected' : '') . ">Rejected</option>";
                     echo "</select>";
                     echo "<button type='submit'>Update</button>";
                     echo "</form>";
