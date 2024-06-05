@@ -16,21 +16,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the status update form is submitted
     if (isset($_POST['id']) && isset($_POST['new_status'])) {
         // Validate and sanitize form data
-        $request_id = $_POST['id'];
-        $new_status = $_POST['new_status'];
+        $request_id = intval($_POST['id']);
+        $new_status = $conn->real_escape_string($_POST['new_status']);
 
         // Update the status of the request in the database
-        $sql = "UPDATE cert_requests SET status='$new_status' WHERE id=$request_id";
+        $sql = $conn->prepare("UPDATE cert_requests SET status=? WHERE id=?");
+        $sql->bind_param("si", $new_status, $request_id);
 
-        if ($conn->query($sql) === TRUE) {
+        if ($sql->execute() === TRUE) {
             // Generate certificate if status is approved
             if ($new_status == 'Approved') {
                 header("Location: cert_outine.php?id=$request_id");
-
                 exit();
+            } elseif ($new_status == 'Completed') {
+                // Delete the record if the status is set to "Completed"
+                $delete_sql = $conn->prepare("DELETE FROM cert_requests WHERE id=?");
+                $delete_sql->bind_param("i", $request_id);
+                if ($delete_sql->execute() === TRUE) {
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    echo "Error deleting request: " . $conn->error;
+                }
             } else {
                 // Redirect back to the same page
-                header("Location: ".$_SERVER['PHP_SELF']);
+                header("Location: " . $_SERVER['PHP_SELF']);
                 exit();
             }
         } else {
@@ -55,37 +65,6 @@ $result = $conn->query($sql);
 
     <link rel="stylesheet" href="sidenavbar.css">
     <title>Blotter</title> 
-</head>
-
-<body>
-<header>
-    <ul class="sidenav">
-        <!-- Profile Section -->
-        <center>
-        <li class="logo-profile">
-            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
-            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
-        </li>
-        </center>
-        <div class="tools">
-                <!-- Left Nav Bar -->
-                <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
-                <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
-                <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
-                <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
-                <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
-                <li class="sidebar">
-                    <a href="logout.php" style="text-decoration: none;">Logout</a>
-                </li>
-            </div>
-    </ul>
-</header>
-
-<section class="main">
-<div class="header">
-<img src="logo.png" alt="Logo" class="header-logo">
-        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
-    </div>
     <style>
         .requests {
             width: 80%;
@@ -126,7 +105,35 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
+<header>
+    <ul class="sidenav">
+        <!-- Profile Section -->
+        <center>
+        <li class="logo-profile">
+            <img src="profile.png" alt="Profile Picture" class="logo-profile-photo">
+            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
+        </li>
+        </center>
+        <div class="tools">
+            <!-- Left Nav Bar -->
+            <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
+            <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
+            <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
+            <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
+            <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
+            <li class="sidebar"><a href="history_transaction.php"style="text-decoration: none;">History Transaction</a></li>
+            <li class="sidebar">
+                <a href="logout.php" style="text-decoration: none;">Logout</a>
+            </li>
+        </div>
+    </ul>
+</header>
 
+<section class="main">
+    <div class="header">
+        <img src="logo.png" alt="Logo" class="header-logo">
+        <h2>BARANGAY MANAGEMENT SYSTEM</h2>
+    </div>
     <div class="requests">
         <h2>Certificate Requests</h2>
         <table id="requestsTable">
@@ -138,7 +145,6 @@ $result = $conn->query($sql);
                 <th>Address</th>
                 <th>Purpose</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
             <?php
             if ($result->num_rows > 0) {
@@ -150,7 +156,6 @@ $result = $conn->query($sql);
                     echo "<td>" . $row['age'] . "</td>";
                     echo "<td>" . $row['user_add'] . "</td>";
                     echo "<td>" . $row['user_purpose'] . "</td>";
-                    echo "<td>" . $row['status'] . "</td>";
                     echo "<td>";
                     echo "<form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
                     echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
@@ -158,8 +163,9 @@ $result = $conn->query($sql);
                     echo "<option value='Pending'" . ($row['status'] == 'Pending' ? ' selected' : '') . ">Pending</option>";
                     echo "<option value='Approved'" . ($row['status'] == 'Approved' ? ' selected' : '') . ">Approved</option>";
                     echo "<option value='Rejected'" . ($row['status'] == 'Rejected' ? ' selected' : '') . ">Rejected</option>";
+                    echo "<option value='Completed'" . ($row['status'] == 'Completed' ? ' selected' : '') . ">Completed</option>";
                     echo "</select>";
-                    echo "<button type='submit'>Update</button>";
+                    echo "<center><button type='submit'>Okay</button></center";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";
@@ -170,7 +176,6 @@ $result = $conn->query($sql);
             ?>
         </table>
     </div>
-
 
     <?php
     // Close database connection

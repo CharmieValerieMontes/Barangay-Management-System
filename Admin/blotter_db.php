@@ -116,9 +116,9 @@ $conn->close();
             <li class="sidebar"><a href="blotter.php">Blotter</a></li>
             <li class="sidebar"><a href="brgy_id.php">ID Request</a></li>
             <li class="sidebar"><a href="brgy_cert.php">Certificate</a></li>
-            <li class="sidebar"><a href="request_dashboard.php">Requests</a></li>
-            <li class="sidebar"><a href="blotter_db.php">Blotter DB</a></li>
+            <li class="sidebar"><a href="history_transaction.php">History Transaction</a></li>
             <li class="sidebar"><a href="logout.php">Logout</a></li>
+            
         </div>
     </ul>
 </header>
