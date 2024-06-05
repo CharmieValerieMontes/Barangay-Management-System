@@ -20,7 +20,6 @@ $logged_in_username = $_SESSION['username'];
 // Fetch transaction history for the logged-in user
 $sql = "SELECT * FROM cert_requests WHERE username='$logged_in_username'";
 $result = $conn->query($sql);
-
 ?>
 
 <!DOCTYPE html>
@@ -56,12 +55,12 @@ $result = $conn->query($sql);
     <table class="table table-striped">
         <thead>
             <tr>
-              
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Age</th>
                 <th scope="col">Address</th>
                 <th scope="col">Purpose</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody>
@@ -74,6 +73,11 @@ $result = $conn->query($sql);
                     echo "<td>" . $row['age'] . "</td>";
                     echo "<td>" . $row['user_add'] . "</td>";
                     echo "<td>" . $row['user_purpose'] . "</td>";
+                    if ($row['status'] === '') {
+                        echo "<td>Pending</td>";
+                    } else {
+                        echo "<td>" . $row['status'] . "</td>";
+                    }
                     echo "</tr>";
                 }
             } else {

@@ -76,6 +76,7 @@ $conn->close();
     
     <!-- User Picture -->
     <div class="text-center mb-4">
+        <!-- Display the user's picture -->
         <img src="<?php echo $user['picture']; ?>" alt="User Picture" class="img-thumbnail" style="width:150px;height:150px;">
     </div>
 
