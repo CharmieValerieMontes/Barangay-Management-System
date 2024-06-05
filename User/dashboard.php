@@ -48,6 +48,7 @@ $username = $_SESSION['username'];
 <h2>Welcome to Your Dashboard, <?php echo $username; ?>!</h2>
     <p>This is your dashboard where you can view and manage your account information.</p>
 
+    <h1> JOB HIRING! </h1>
 <div class="job">
     <img src= " https://philippinego.com/wp-content/uploads/2022/01/OCD-HIRING-1-1.png"alt="Barangay"/>
     <img src= " https://philippinego.com/wp-content/uploads/2022/06/Copy-of-JOB-2-3.png"alt="Barangay"/>
@@ -62,18 +63,20 @@ $username = $_SESSION['username'];
 
 <style>
     .job {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* Add space between images */
+    justify-content: space-evenly;
+	align-items: center;
 }
 
 .job img {
-    max-width: 400px; /* Adjust the size of the images */
+    max-width: 400px; 
     height: 400px;
-    border: 5px solid #000; /* Add a border to the images */
-    border-top: 5px;
-    border-radius: 10px; /* Add rounded corners */
+    border: 5px solid #000; 
+    border-radius: 10px; 
+}
+.h1 {
+    font-size: 30px bold;
+    text-align: center;
+
 }
 </style>
 

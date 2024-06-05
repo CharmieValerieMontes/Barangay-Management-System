@@ -48,10 +48,10 @@ $username = $_SESSION['username'];
     </header>
 
     <section class="main">
-        <center>
-            <h2>Welcome to Your Dashboard</h2>
-            <p>This is your dashboard where you can view and manage your account information.</p>
-        </center>
+    <div class="header-container">
+        <h2>Welcome to Your Dashboard</h2>
+        <p>This is your dashboard where you can view and manage your account information.</p>
+    </div>
 
         <div class="button-container">
             <form method="post">
@@ -84,31 +84,37 @@ $username = $_SESSION['username'];
         ?>
 
         <style>
-            .button-container {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-gap: 20px;
-                margin: 50px;
-                max-width: 300px;
-                margin-left: 210px;
+           .button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    margin: 50px;
+    max-width: 300px;
+    margin-left: 210px;
+}
 
-            }
+.button-container form {
+    display: flex;
+}
 
-            .button-container form {
-                display: flex;
-            }
+.button {
+    width: 500px;
+    height: 250px;
+    font-size: 30px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
 
-            .button {
-                width: 500px;
-                height: 250px;
-                font-size: 16px;
-                background-color: #4CAF50;
-                border: none;
-                color: white;
-                text-align: center;
-                cursor: pointer;
-                border-radius: 8px;
-            }
+.button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
         </style>
 
 </body>
