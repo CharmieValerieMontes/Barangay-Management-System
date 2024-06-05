@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +93,7 @@ try {
     if ($stmt->rowCount() > 0) {
         // Display records in a table
         echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Age</th><th>Address</th><th>Photo</th><th>Contact Number</th><th>Emergency Contact</th><th>Birthdate</th></tr>";
+        echo "<tr><th>ID</th><th>First Name</th><th>Last Name</th><th>Age</th><th>Address</th><th>Photo</th><th>Contact Number</th><th>Emergency Contact</th><th>Birthdate</th><th>Status</th></tr>";
 
         // Loop through each record and display it
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -108,7 +107,20 @@ try {
             echo "<td>" . $row['contact_number'] . "</td>";
             echo "<td>" . $row['emergency_contact'] . "</td>";
             echo "<td>" . $row['birthdate'] . "</td>";
+            echo "<td><form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "</td>";
+                    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                    echo "<select name='new_status'>";
+                    echo "<option value='Pending'" . ($row['status'] == 'Pending' ? ' selected' : '') . ">Pending</option>";
+                    echo "<option value='Approved'" . ($row['status'] == 'Approved' ? ' selected' : '') . ">Approved</option>";
+                    echo "<option value='Rejected'" . ($row['status'] == 'Rejected' ? ' selected' : '') . ">Rejected</option>";
+                    echo "<option value='Completed'" . ($row['status'] == 'Completed' ? ' selected' : '') . ">Completed</option>";
+                    echo "</select>";
+                    echo "<center><button type='submit'>Okay</button></center";
+                    echo "</form>";
             echo "</tr>";
+            
+                    echo "</td>";
+                    echo "</tr>";
         }
 
         echo "</table>";

@@ -38,7 +38,6 @@ $username = $_SESSION['username'];
                 <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
                 <li class="sidebar-active"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
                 <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
-                <li class="sidebar"><a href="history_transaction.php"style="text-decoration: none;">History Transaction</a></li>
                 <li class="sidebar">
                     <a href="logout.php" style="text-decoration: none;">Logout</a>
                 </li>
