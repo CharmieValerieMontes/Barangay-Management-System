@@ -15,30 +15,28 @@
 <header>
     <ul class="sidenav">
         <!-- Profile Section -->
-        <center>
         <li class="logo-profile">
             <img src="logo.png" alt="Profile Picture" class="logo-profile-photo">
-            <div class="text-profile"><p style="color: #fff;">Admin</p></div>
+            <div class="text-profile"><p style="color: #fff;">Resident</p></div>
         </li>
-        </center>
         <div class="tools">
-            <!-- Left Nav Bar -->
-            <li class="sidebar"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
-            <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
-            <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
-            <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
-            <li class="sidebar-active"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
-            <li class="sidebar">
-                <a href="logout.php" style="text-decoration: none;">Logout</a>
-            </li>
-        </div>
+                <!-- Left Nav Bar -->
+                <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
+                <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
+                <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
+                <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
+                <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
+                <li class="sidebar">
+                    <a href="logout.php" style="text-decoration: none;">Logout</a>
+                </li>
+            </div>
     </ul>
 </header>
 
 <section class="main">
     <h1>Barangay Certificate Request</h1>
 
-    <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+    <form action=".../User/cert_requestDB.php" method="post" class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
         <div class="col-md-4">
             <label for="firstname" class="form-label">First name</label>
             <input type="text" class="form-control" name="first_name" id="firstname" required>
@@ -50,7 +48,7 @@
         <div class="col-md-4">
             <label for="age" class="form-label">Age</label>
             <input type="age" class="form-control" name="age" id="age" required>
-            <div class="invalid-feedback">
+            <div class="iAnvalid-feedback">
                 Please provide age
             </div>
         </div>
@@ -74,7 +72,7 @@
                 Please select purpose
             </div>
         </div>
-        <div class="button">
+        <div class="col-12">
             <button class="btn btn-primary" id="submit" type="submit">Submit form</button>
         </div>
     </form>
