@@ -65,7 +65,7 @@
         <input type="password" id="password" name="password" required>
 
         <label for="picture">Upload Picture:</label>
-        <input type="file" id="picture" name="picture" accept=".jpg, .jpeg, .png" required>
+        <input type="file" id="picture" name="picture"  required>
         
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
