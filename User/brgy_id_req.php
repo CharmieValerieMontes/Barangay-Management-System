@@ -23,11 +23,13 @@
         </center>
         <div class="tools">
             <!-- Left Nav Bar -->
-            <li class="sidebar"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard</a></li>
-            <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
+            <li class="sidebar-active"><a href="dashboard.php" style="text-decoration: none;">Home </a></li>
+            <li class="sidebar"><a href="edit_profile.php" style="text-decoration: none;">Profile User </a></li>
             <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
-            <li class="sidebar-active"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
-            <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
+            <li class="sidebar"><a href="brgy_id_req.php" style="text-decoration: none;">ID Request</a></li>
+            <li class="sidebar"><a href="brgy_cert_req.php" style="text-decoration: none;">Certificate </a></li>
+            <li class="sidebar"><a href="history_transaction.php" style="text-decoration: none;">History of Transactions </a></li>
+            <!-- Logout Button -->
             <li class="sidebar">
                 <a href="logout.php" style="text-decoration: none;">Logout</a>
             </li>

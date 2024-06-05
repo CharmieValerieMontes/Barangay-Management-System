@@ -7,6 +7,7 @@ $dbname = "barangay_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -16,44 +17,57 @@ if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Check if the user is an admin
-    $sql = "SELECT * FROM users WHERE username=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Check if the username exists in the admin table
+    $sql_admin = "SELECT * FROM new_admin WHERE username=?";
+    $stmt_admin = $conn->prepare($sql_admin);
+    if ($stmt_admin === false) {
+        die("Error in preparing SQL statement: " . $conn->error);
+    }
+    $stmt_admin->bind_param("s", $username);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
 
-    if ($result->num_rows > 0) {
-        $admin = $result->fetch_assoc();
-        
-        // Verify the password
-        if (password_verify($password, $admin['password'])) {
+    if ($result_admin === false) {
+        die("Error in executing SQL statement: " . $conn->error);
+    }
+
+    if ($result_admin->num_rows > 0) {
+        $user = $result_admin->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
             // Password is correct, admin logged in successfully
             session_start();
-            $_SESSION['username'] = $username;
+            $_SESSION['username'] = $user['username'];
             header("Location: ../Admin/admin_dashboard.php");
             exit();
         } else {
             // Invalid password
             echo "Invalid password. Please try again.";
         }
+        $stmt_admin->close();
     } else {
-        // Check if the user is a regular user
-        $sql = "SELECT * FROM users WHERE username=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        // Check if the username exists in the user table
+        $sql_user = "SELECT * FROM users WHERE username=?";
+        $stmt_user = $conn->prepare($sql_user);
+        if ($stmt_user === false) {
+            die("Error in preparing SQL statement: " . $conn->error);
+        }
+        $stmt_user->bind_param("s", $username);
+        $stmt_user->execute();
+        $result_user = $stmt_user->get_result();
 
-        if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            
-            // Verify the password
+        if ($result_user === false) {
+            die("Error in executing SQL statement: " . $conn->error);
+        }
+
+        if ($result_user->num_rows > 0) {
+            $user = $result_user->fetch_assoc();
+
             if (password_verify($password, $user['password'])) {
                 // Password is correct, user logged in successfully
                 session_start();
-                $_SESSION['username'] = $username;
-                header("Location: user_dashboard.php");
+                $_SESSION['username'] = $user['username'];
+                header("Location: dashboard.php");
                 exit();
             } else {
                 // Invalid password
@@ -63,9 +77,8 @@ if(isset($_POST['login'])){
             // User not found
             echo "User not found. Please register first.";
         }
+        $stmt_user->close();
     }
-
-    $stmt->close();
 }
 
 // Close database connection

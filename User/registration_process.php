@@ -31,7 +31,7 @@ if(isset($_POST['register'])){
     // Hash the password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO users (username, password, name, address, birthdate, age, birthplace, marital_status, picture) 
+    $sql = "INSERT INTO new_admin (username, password, name, address, birthdate, age, birthplace, marital_status, picture) 
             VALUES ('$username', '$hashed_password', '$name', '$address', '$birthdate', '$age', '$birthplace', '$marital_status', '$picture_path')";
     
     if ($conn->query($sql) === TRUE) {
