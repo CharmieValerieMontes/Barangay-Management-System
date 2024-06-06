@@ -87,21 +87,31 @@ $username = "root";
 $password = "";
 $dbname = "barangay_db";
 
+
+session_start(); // Start the session
+
+// Retrieve the logged-in username from the session
+$logged_in_username = $_SESSION['username'];
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare("INSERT INTO barangay_id_requests (first_name, last_name, age, user_address, photo_upload, contact_number, emergency_contact, birthdate) 
-                            VALUES (:first_name, :last_name, :age, :user_address, :photo_upload, :contact_number, :emergency_contact, :birthdate)");
+    $stmt = $conn->prepare("INSERT INTO barangay_id_requests (username, first_name, last_name, age, user_address, photo_upload, contact_number, emergency_contact, birthdate) 
+                            VALUES (:logged_in_username, :first_name, :last_name, :age, :user_address, :photo_upload, :contact_number, :emergency_contact, :birthdate)");
 
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':age', $age);
-    $stmt->bindParam(':user_address', $user_address);
-    $stmt->bindParam(':photo_upload', $filename);
-    $stmt->bindParam(':contact_number', $contact_number);
-    $stmt->bindParam(':emergency_contact', $emergency_contact);
-    $stmt->bindParam(':birthdate', $birthdate);
+$stmt->bindParam(':logged_in_username', $logged_in_username);
+$stmt->bindParam(':first_name', $_POST['first_name']);
+$stmt->bindParam(':last_name', $_POST['last_name']);
+$stmt->bindParam(':age', $_POST['age']);
+$stmt->bindParam(':user_address', $_POST['user_add']);
+$stmt->bindParam(':photo_upload', $_FILES['photo_upload']['name']);
+$stmt->bindParam(':contact_number', $_POST['contact_number']);
+$stmt->bindParam(':emergency_contact', $_POST['emergency_contact']);
+$stmt->bindParam(':birthdate', $_POST['birthdate']);
+
+$stmt->execute();
+
 
     // Get form data
     $first_name = $_POST['first_name'];

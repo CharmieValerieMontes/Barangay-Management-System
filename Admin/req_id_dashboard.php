@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($new_status == 'Completed') {
             // Delete the record if the status is set to "Completed"
-            $delete_sql = "DELETE FROM barangay_id_request WHERE id=$request_id";
+            $delete_sql = "DELETE FROM barangay_id_requests WHERE id=$request_id";
             if ($conn->query($delete_sql) === TRUE) {
                 header("Location: " . $_SERVER['PHP_SELF']);
                 exit();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // Update the status of the request in the database
-            $sql = "UPDATE cert_requests SET status='$new_status' WHERE id=$request_id";
+            $sql = "UPDATE barangay_id_requests SET status='$new_status' WHERE id=$request_id";
 
             if ($conn->query($sql) === TRUE) {
                 // Generate certificate if status is approved
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Retrieve certificate requests from the database
-$sql = "SELECT * FROM cert_requests";
+$sql = "SELECT * FROM barangay_id_requests";
 $result = $conn->query($sql);
 ?>
 
@@ -64,7 +64,7 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="sidenavbar.css">
-    <title>Blotter</title> 
+    <title>ID Request</title> 
 </head>
 
 <body>
@@ -136,25 +136,22 @@ $result = $conn->query($sql);
     </style>
 
     <div class="requests">
-        <h2>ID Request</h2>
+        <h2>ID Requests</h2>
         <table id="requestsTable">
             <tr>
                 <th>Request ID</th>
                 <th>Username</th>
-                <th>Name</th>
+                <th> Name</th>
                 <th>Age</th>
-                <th>Address</th>
                 <th>Action</th>
             </tr>
             <?php
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    echo "<tr id='row_".$row['id']."'>";
                     echo "<td>" . $row['id'] . "</td>";
                     echo "<td>" . $row['username'] . "</td>";
                     echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                     echo "<td>" . $row['age'] . "</td>";
-                    echo "<td>" . $row['user_add'] . "</td>";
                     echo "<td>";
                     echo "<form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
                     echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
