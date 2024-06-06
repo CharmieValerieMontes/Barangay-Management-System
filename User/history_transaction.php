@@ -32,7 +32,54 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="sidenavbar.css">
     <title>History of Transactions</title>
 </head>
+<style>
+.history {
+     width: 100%;
+     margin: 0 auto;
+     background-color: #fff;
+     padding: 20px;
+     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+.table-transaction {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #ddd;
+}
 
+.table-transaction thead th {
+    background-color: #343a40;
+    color:#f2f2f2;
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table-transaction tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-transaction tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.table-transaction td, .table-transaction th {
+    padding: 15px;
+    vertical-align: middle;
+}
+.btn {
+            padding: 5px 10px;
+            text-align: center;
+            color: #fff;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn.reject {
+            background-color: #d9534f;
+        }
+
+        </style>
 <body>
     <header>
         <ul class="sidenav">
@@ -56,21 +103,26 @@ $result = $conn->query($sql);
 <img src="logo.png" alt="Logo" class="header-logo">
         <h2>BARANGAY MANAGEMENT SYSTEM</h2>
     </div>
-    
-        <h1>Transaction History</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Request Date</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Purpose</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="history">
+        <center><h1>Transaction History</h1></center>
+        <table class="table-transaction">
+    <thead>
+        <tr>
+            <th>Request Date</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Purpose</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="7">No transactions found.</td>
+        </tr>
+    </tbody>
+</table>
                 <?php
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
@@ -89,7 +141,7 @@ $result = $conn->query($sql);
                         echo "</tr>";
                     }
                 } else {
-                    echo "<tr><td colspan='6'>No transactions found.</td></tr>";
+                   
                 }
                 $conn->close();
                 ?>
