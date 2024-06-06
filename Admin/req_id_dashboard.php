@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Retrieve certificate requests from the database
-$sql = "SELECT * FROM barangay_id_requests";
+$sql = "SELECT * FROM barangay_id_requests WHERE username != 'admin'";
 $result = $conn->query($sql);
 ?>
 
