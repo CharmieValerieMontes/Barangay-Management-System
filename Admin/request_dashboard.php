@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($new_status == 'Completed') {
             // Delete the record if the status is set to "Completed"
-            $delete_sql = "DELETE FROM barangay_id_requests WHERE id=$request_id";
+            $delete_sql = "DELETE FROM cert_requests WHERE id=$request_id";
             if ($conn->query($delete_sql) === TRUE) {
                 header("Location: " . $_SERVER['PHP_SELF']);
                 exit();
@@ -30,12 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             // Update the status of the request in the database
-            $sql = "UPDATE barangay_id_requests SET status='$new_status' WHERE id=$request_id";
+            $sql = "UPDATE cert_requests SET status='$new_status' WHERE id=$request_id";
 
             if ($conn->query($sql) === TRUE) {
-                // Redirect back to the same page
-                header("Location: " . $_SERVER['PHP_SELF']);
-                exit();
+                // Generate certificate if status is approved
+                if ($new_status == 'Approved') {
+                    header("Location: cert_outine.php?id=$request_id");
+                    exit();
+                } else {
+                    // Redirect back to the same page
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                }
             } else {
                 echo "Error updating status: " . $conn->error;
             }
@@ -43,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Retrieve barangay ID requests from the database
-$sql = "SELECT * FROM barangay_id_requests";
+// Retrieve certificate requests from the database
+$sql = "SELECT * FROM cert_requests";
 $result = $conn->query($sql);
 ?>
 
@@ -58,7 +64,7 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="sidenavbar.css">
-    <title>Barangay ID Requests</title> 
+    <title>Blotter</title> 
 </head>
 
 <body>
@@ -130,15 +136,15 @@ $result = $conn->query($sql);
     </style>
 
     <div class="requests">
-        <h2>Barangay ID Requests</h2>
+        <h2>Certificate Requests</h2>
         <table id="requestsTable">
             <tr>
                 <th>Request ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Username</th>
+                <th>Name</th>
                 <th>Age</th>
                 <th>Address</th>
-                <th>Contact</th>
+                <th>Purpose</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -147,11 +153,11 @@ $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "<tr id='row_".$row['id']."'>";
                     echo "<td>" . $row['id'] . "</td>";
-                    echo "<td>" . $row['first_name'] . "</td>";
-                    echo "<td>" . $row['last_name'] . "</td>";
+                    echo "<td>" . $row['username'] . "</td>";
+                    echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                     echo "<td>" . $row['age'] . "</td>";
-                    echo "<td>" . $row['user_address'] . "</td>";
-                    echo "<td>" . $row['contact_number'] . "</td>";
+                    echo "<td>" . $row['user_add'] . "</td>";
+                    echo "<td>" . $row['user_purpose'] . "</td>";
                     echo "<td>" . $row['status'] . "</td>";
                     echo "<td>";
                     echo "<form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
