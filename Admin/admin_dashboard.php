@@ -54,10 +54,10 @@ $username = $_SESSION['username'];
     </div>
 
         <div class="button-container">
-            <form method="post">
-                <button type="submit" name="button1" class="button">RESIDENCES</button>
+            <form method="post" action="All_residents_dashboard.php">
+                <button type="submit" name="button1"  class="button">RESIDENCES</button>
             </form>
-            <form method="post"action="blotter_db.php">
+            <form method="post"action="blotter_report.php">
                 <button type="submit" name="button2" class="button">BLOTTER</button>
             </form>
             <form method="post" action="req_id_dashboard.php">
@@ -72,7 +72,7 @@ $username = $_SESSION['username'];
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_POST['button1'])) {
-                echo "<p>You pressed Button 1</p>";
+                
             } elseif (isset($_POST['button2'])) {
                 echo "<p>You pressed Button 2</p>";
             } elseif (isset($_POST['button3'])) {
