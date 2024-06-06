@@ -51,7 +51,6 @@ $conn->close();
     <style>
         .form-label {
             text-align: left;
-            /* Ensures the label text is left-aligned */
         }
     </style>
 </head>
@@ -66,7 +65,6 @@ $conn->close();
             <div class="tools">
                 <li class="sidebar"><a href="dashboard.php" style="text-decoration: none;">Home </a></li>
                 <li class="sidebar-active"><a href="user_profile.php" style="text-decoration: none;">Profile User </a></li>
-                <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
                 <li class="sidebar"><a href="brgy_id_req.php" style="text-decoration: none;">ID Request</a></li>
                 <li class="sidebar"><a href="brgy_cert_req.php" style="text-decoration: none;">Certificate </a></li>
                 <li class="sidebar"><a href="history_transaction.php" style="text-decoration: none;">History of Transactions </a></li>
