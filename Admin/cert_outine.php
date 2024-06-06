@@ -52,7 +52,10 @@ $conn->close();
             border: 2px solid #000;
             border-radius: 10px;
         }
-        .cert-header, .cert-footer {
+        .cert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
         }
         .cert-header img {
@@ -76,12 +79,14 @@ $conn->close();
 <body>
     <div class="cert-container">
         <div class="cert-header">
+            <div class="header-text">
+                <h2>Republic of the Philippines</h2>
+                <h3>City of Manila</h3>
+                <h3>Office of the Barangay Captain</h3>
+                <h3>Barangay 867, Zone 95, District VI</h3>
+                <h3>Kahlom 2 Pandacan, Manila</h3>
+            </div>
             <img src="logo.png" alt="Barangay Logo">
-            <h2>Republic of the Philippines</h2>
-            <h3>City of Manila</h3>
-            <h3>Office of the Barangay Captain</h3>
-            <h3>Barangay 867, Zone 95, District VI</h3>
-            <h3>Kahlom 2 Pandacan, Manila</h3>
         </div>
 
         <div class="cert-body">
@@ -104,10 +109,6 @@ $conn->close();
             <p>Barangay Chairman</p>
             <p>Not valid without dry seal</p>
         </div>
-
-        <button class="btn" onclick="printCertificate()">Print</button>
-        <button class="btn" onclick="saveAsPDF()">Save as PDF</button>
-    </div>
 
     <script>
         function printCertificate() {

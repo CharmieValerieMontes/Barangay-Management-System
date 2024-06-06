@@ -64,7 +64,7 @@ $conn->close();
             background-color: #fff8de;
         }
         .requests {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
@@ -84,8 +84,9 @@ $conn->close();
             padding: 8px;
         }
         table th {
-            background-color: #f2f2f2;
+            background-color: #343a40;
             text-align: left;
+            color: white;
         }
         .btn {
             padding: 5px 10px;
