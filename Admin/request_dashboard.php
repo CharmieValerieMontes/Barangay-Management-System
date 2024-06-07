@@ -98,7 +98,7 @@ $result = $conn->query($sql);
     </div>
     <style>
         .requests {
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             background-color: #fff;
             padding: 20px;
@@ -112,14 +112,18 @@ $result = $conn->query($sql);
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            text-align: center;
         }
         table th, table td {
             border: 1px solid #ddd;
             padding: 8px;
+            text-align: center;
         }
         table th {
-            background-color: #f2f2f2;
+            background-color: #343a40;
             text-align: left;
+            color: white;
+            text-align: center;
         }
         .btn {
             padding: 5px 10px;

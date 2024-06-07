@@ -51,7 +51,7 @@ $username = $_SESSION['username'];
     </div>
    <center> <h1>Blotter</h1></center>
 
-    <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+    <form class="row g-3 needs-validation" novalidate action="blotter_db.php" method="post" enctype="multipart/form-data">
         <div class="col-md-4">
             <label for="firstname" class="form-label">First name</label>
             <input type="text" class="form-control" name="first_name" id="firstname" required>
