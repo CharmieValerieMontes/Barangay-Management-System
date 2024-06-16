@@ -81,7 +81,6 @@ $result = $conn->query($sql);
         </center>
         <div class="tools">
             <li class="sidebar-active"><a href="admin_dashboard.php">Dashboard</a></li>
-            <li class="sidebar"><a href="new_residences.php">New Residences</a></li>
             <li class="sidebar"><a href="blotter.php">Blotter</a></li>
             <li class="sidebar"><a href="brgy_id.php">ID Request</a></li>
             <li class="sidebar"><a href="brgy_cert.php">Certificate</a></li>

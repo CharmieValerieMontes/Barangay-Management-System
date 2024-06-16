@@ -11,7 +11,7 @@
         }
         h2 {
             text-align: center;
-            color: #333;
+            color: whites;
         }
         form {
             max-width: 400px;

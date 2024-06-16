@@ -26,12 +26,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $address = $_POST['user_add'];
     $accusation = $_POST['user_accu'];
 
-    $sql = "INSERT INTO blotter ( first_name, last_name, age, address, accusation) VALUES ( '$first_name', '$last_name', $age, '$address', '$accusation')";
+    $sql = "INSERT INTO blotter_entries ( first_name, last_name, age, address, accusation) VALUES ( '$first_name', '$last_name', $age, '$address', '$accusation')";
 
     if ($conn->query($sql) === TRUE) {
         echo "New record created successfully";
     } else {
-        echo "No record Found";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
 
     $conn->close();

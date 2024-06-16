@@ -16,7 +16,7 @@ if (isset($_GET['id'])) {
     $request_id = $_GET['id'];
 
     // Retrieve the user data from the database based on request ID
-    $sql = "SELECT * FROM blotter WHERE id=$request_id";
+    $sql = "SELECT * FROM blotter_entries WHERE id=$request_id";
     $result = $conn->query($sql);
 
     // Check if the request exists

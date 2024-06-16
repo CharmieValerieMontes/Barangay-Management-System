@@ -26,14 +26,14 @@ $result_id_requests = $conn->query($sql_barangay_id_requests);
 
 // Merge results into a single array
 $transactions = [];
-if ($result_cert_requests->num_rows > 0) {
+if ($result_cert_requests && $result_cert_requests->num_rows > 0) {
     while ($row = $result_cert_requests->fetch_assoc()) {
         $transactions[] = $row;
     }
 }
 
-if ($result_barangay_id_requests->num_rows > 0) {
-    while ($row = $result_barangay_id_requests->fetch_assoc()) {
+if ($result_id_requests && $result_id_requests->num_rows > 0) {
+    while ($row = $result_id_requests->fetch_assoc()) {
         $transactions[] = $row;
     }
 }

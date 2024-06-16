@@ -64,7 +64,7 @@ $result = $conn->query($sql);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="sidenavbar.css">
-    <title>ID Request</title> 
+    <title>Cert Request</title> 
 </head>
 
 <body>
@@ -80,7 +80,6 @@ $result = $conn->query($sql);
         <div class="tools">
                 <!-- Left Nav Bar -->
                 <li class="sidebar-active"><a href="admin_dashboard.php" style="text-decoration: none;">Dashboard </a></li>
-                <li class="sidebar"><a href="new_residences.php" style="text-decoration: none;">New Residences </a></li>
                 <li class="sidebar"><a href="blotter.php" style="text-decoration: none;">Blotter</a></li>
                 <li class="sidebar"><a href="brgy_id.php" style="text-decoration: none;">ID Request</a></li>
                 <li class="sidebar"><a href="brgy_cert.php" style="text-decoration: none;">Certificate </a></li>
@@ -97,7 +96,7 @@ $result = $conn->query($sql);
         <h2>BARANGAY MANAGEMENT SYSTEM</h2>
     </div>
     <style>
-       .requests {
+        .requests {
             width: 100%;
             margin: 0 auto;
             background-color: #fff;
@@ -140,22 +139,25 @@ $result = $conn->query($sql);
     </style>
 
     <div class="requests">
-        <h2>ID Requests</h2>
+        <h2>Barangay ID Requests</h2>
         <table id="requestsTable">
             <tr>
                 <th>Request ID</th>
                 <th>Username</th>
-                <th> Name</th>
+                <th>Name</th>
                 <th>Age</th>
+                <th>Address</th>
                 <th>Action</th>
             </tr>
             <?php
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
+                    echo "<tr id='row_".$row['id']."'>";
                     echo "<td>" . $row['id'] . "</td>";
                     echo "<td>" . $row['username'] . "</td>";
                     echo "<td>" . $row['first_name'] . " " . $row['last_name'] . "</td>";
                     echo "<td>" . $row['age'] . "</td>";
+                    echo "<td>" . $row['status'] . "</td>";
                     echo "<td>";
                     echo "<form id='form_".$row['id']."' method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
                     echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
